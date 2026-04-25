@@ -141,7 +141,7 @@ const crypto = require('crypto');
 
 const PORT          = parseInt(process.env.PORT)          || 3011;
 const ADMIN_HOST    = process.env.ADMIN_HOST              || '127.0.0.1';
-const ADMIN_PORT    = parseInt(process.env.ADMIN_PORT)    || 3002;
+const ADMIN_PORT    = parseInt(process.env.ADMIN_PORT)    || 3006;
 const ADMIN_PROTO   = process.env.ADMIN_PROTOCOL          || 'http';  // http | https
 
 // 浏览量数据文件（写到 admin/data/ 供后台读取）

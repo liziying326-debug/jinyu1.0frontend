@@ -1,7 +1,8 @@
 // API Client - 不影响原有i18n.js功能
 // 只在需要动态加载数据时使用
 
-const API_BASE = window.location.origin;
+// ✅ 修复：正确指向后台 3006 端口
+const API_BASE = window.location.origin + ':3006';
 
 // 共享图片URL配置 - About页面相关图片
 // 首页About Us图片 和 about页Our Journey图片共享同一个URL

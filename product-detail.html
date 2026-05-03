@@ -1714,7 +1714,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   // 3. /products?id=xxx（兼容旧格式）
   const pathParts = window.location.pathname.replace(/^\/|\/$/g, '').split('/');
   let id = '';
-  if (pathParts.length >= 2 && pathParts[0] === 'products' && pathParts[1]) {
+  // 只有当路径是 /products/:slug（且 :slug 不是 'category'）时，才认为是产品详情页
+  if (pathParts.length >= 2 && pathParts[0] === 'products' && pathParts[1] && pathParts[1] !== 'category') {
     id = pathParts[1];
   }
   if (!id) {

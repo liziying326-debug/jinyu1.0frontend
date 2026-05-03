@@ -819,6 +819,20 @@ const server = http.createServer((req, res) => {
 
   fs.readFile(filePath, (err, data) => {
     if (err) {
+      // SPA Fallback: 如果文件不存在，返回 index.html（支持 Vue Router History 模式）
+      if (err.code === 'ENOENT' && !pathname.startsWith('/api/') && !pathname.startsWith('/uploads/')) {
+        const indexFile = path.join(__dirname, 'index.html');
+        fs.readFile(indexFile, (err2, data2) => {
+          if (err2) {
+            res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+            res.end('<h1>404 Not Found</h1>');
+            return;
+          }
+          res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+          res.end(data2);
+        });
+        return;
+      }
       res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
       res.end('<h1>404 Not Found</h1>');
       return;

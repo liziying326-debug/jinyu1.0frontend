@@ -761,8 +761,8 @@ const server = http.createServer((req, res) => {
   // /contact               → contact.html
   // /applications          → applications.html
   // /case-studies          → case-studies.html
-  // /news                  → news.html
-  // /news/:slug            → news-detail.html
+  // ── Products 路由重写 ──────────────────────────────
+  console.log('[Rewrite] Original pathname:', pathname);
   if (pathname === '/products') {
     const q = parsedUrl.query || '';
     if (q && (q.includes('id=') || q.includes('slug='))) {
@@ -770,17 +770,24 @@ const server = http.createServer((req, res) => {
     } else {
       pathname = '/products.html';
     }
- } else if (pathname.startsWith('/products/category/')) {
-  // /products/category/:catSlug → products.html
-  pathname = '/products.html';
-  const catSlug = parsedUrl.pathname.replace('/products/category/', '').split('/')[0];
-  parsedUrl.search = '?category=' + encodeURIComponent(catSlug);
-  } else if (pathname.startsWith('/products/')) {
-    // /products/:slug → product-detail.html
+    console.log('[Rewrite] /products →', pathname, 'search:', parsedUrl.search);
+  }
+  // /products/category/:catSlug → products.html?category=:catSlug
+  else if (pathname.startsWith('/products/category/')) {
+    const catSlug = pathname.replace('/products/category/', '').split('/')[0];
+    pathname = '/products.html';
+    parsedUrl.search = '?category=' + encodeURIComponent(catSlug);
+    console.log('[Rewrite] /products/category/' + catSlug + ' →', pathname, parsedUrl.search);
+  }
+  // /products/:slug → product-detail.html?slug=:slug
+  else if (pathname.startsWith('/products/')) {
+    const slug = pathname.replace('/products/', '').split('/')[0];
     pathname = '/product-detail.html';
-    const slug = parsedUrl.pathname.replace('/products/', '').split('/')[0];
     parsedUrl.search = '?slug=' + encodeURIComponent(slug);
-  } else if (pathname === '/about') {
+    console.log('[Rewrite] /products/' + slug + ' →', pathname, parsedUrl.search);
+  }
+  // ── 其他路由重写 ────────────────────────────────────
+  else if (pathname === '/about') {
     pathname = '/about.html';
   } else if (pathname === '/contact') {
     pathname = '/contact.html';
@@ -795,6 +802,7 @@ const server = http.createServer((req, res) => {
   } else if (pathname.startsWith('/news/')) {
     pathname = '/news-detail.html';
   }
+  console.log('[Rewrite] Final pathname:', pathname, 'search:', parsedUrl.search);
 
   // 浏览量统计（仅统计真实访客，排除本地 IP）
   if (req.method === 'GET') {

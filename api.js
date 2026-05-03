@@ -201,7 +201,11 @@ async function loadNavProductDropdown() {
           dropdown.querySelectorAll('a').forEach(function(a) { a.classList.remove('dd-active'); });
           this.classList.add('dd-active');
           const hash = this.getAttribute('href').replace('#', '');
-          if (hash) window.switchCat(hash);
+          if (hash) {
+            window.switchCat(hash);
+            // 更新 URL hash（不刷新页面）
+            history.pushState(null, '', '#' + hash);
+          }
         });
       });
     }

@@ -168,7 +168,7 @@ async function loadNavProductDropdown() {
     list.sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
 
     const isSelfPage = dropdown.hasAttribute('data-self-page');
-    const prefix = isSelfPage ? '/products#' : '/products#';
+    const prefix = isSelfPage ? '#' : '/products/category/';
     console.log('[Dropdown DEBUG] prefix:', prefix, 'isSelfPage:', isSelfPage);
 
     // 获取当前语言
@@ -184,7 +184,7 @@ async function loadNavProductDropdown() {
         name = await window.autoTranslate.pickLang(cat, 'name', lang);
       }
       if (!name) name = cat.name_en || cat.name || String(cat.id);
-      const slug = String(cat.id);
+      const slug = cat.slug || cat.id;
       return `<a href="${prefix}${slug}">${name}</a>`;
     }));
 
@@ -200,7 +200,7 @@ async function loadNavProductDropdown() {
           // 清除其他项的高亮
           dropdown.querySelectorAll('a').forEach(function(a) { a.classList.remove('dd-active'); });
           this.classList.add('dd-active');
-          const hash = this.getAttribute('href').replace('/products#', '');
+          const hash = this.getAttribute('href').replace('#', '');
           if (hash) window.switchCat(hash);
         });
       });

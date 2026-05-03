@@ -775,13 +775,11 @@ const server = http.createServer((req, res) => {
   pathname = '/products.html';
   const catSlug = pathname.replace('/products/category/', '').split('/')[0];
   parsedUrl.search = '?category=' + encodeURIComponent(catSlug);
-} else if (pathname.startsWith('/products/')) {
-  // /products/:slug → product-detail.html
-  pathname = '/product-detail.html';
-  const slug = pathname.replace('/products/', '').split('/')[0];
-  parsedUrl.search = '?slug=' + encodeURIComponent(slug);
-}
-
+  } else if (pathname.startsWith('/products/')) {
+    // /products/:slug → product-detail.html
+    pathname = '/product-detail.html';
+    const slug = pathname.replace('/products/', '').split('/')[0];
+    parsedUrl.search = '?slug=' + encodeURIComponent(slug);
   } else if (pathname === '/about') {
     pathname = '/about.html';
   } else if (pathname === '/contact') {

@@ -770,13 +770,18 @@ const server = http.createServer((req, res) => {
     } else {
       pathname = '/products.html';
     }
-  } else if (pathname.startsWith('/products/')) {
-    // /products/:slug → product-detail.html
-    const parts = pathname.replace(/^\/products\//, '').split('/').filter(Boolean);
-    pathname = '/product-detail.html';
-    // 将 slug 作为查询参数传给 product-detail.html（兼容现有 JS 逻辑）
-    const slug = parts.join('/');
-    parsedUrl.search = '?slug=' + encodeURIComponent(slug);
+ } else if (pathname.startsWith('/products/category/')) {
+  // /products/category/:catSlug → products.html
+  pathname = '/products.html';
+  const catSlug = pathname.replace('/products/category/', '').split('/')[0];
+  parsedUrl.search = '?category=' + encodeURIComponent(catSlug);
+} else if (pathname.startsWith('/products/')) {
+  // /products/:slug → product-detail.html
+  pathname = '/product-detail.html';
+  const slug = pathname.replace('/products/', '').split('/')[0];
+  parsedUrl.search = '?slug=' + encodeURIComponent(slug);
+}
+
   } else if (pathname === '/about') {
     pathname = '/about.html';
   } else if (pathname === '/contact') {

@@ -100,7 +100,7 @@
 
 <!-- ========== HERO ========== -->
 <section class="hero">
-  <img src="/images/factory-hero.jpg" alt="Jin Yu Advertising Material Factory" class="hero-bg-img" width="1920" height="1080" decoding="async" fetchpriority="high" />
+  <img src="/images/factory-hero.jpg" alt="Jin Yu Advertising Material Factory" class="hero-bg hero-bg-img" width="1920" height="1080" decoding="async" fetchpriority="high" />
   <div class="hero-overlay"></div>
   <div class="hero-bokeh">
     <div class="bokeh-spot bokeh-1"></div>
@@ -737,7 +737,14 @@ async function loadHomepageData() {
     // ── 1. Hero 背景图 ─────────────────────────────────────────
     if (d.hero_bg_image) {
       const heroBg = document.querySelector('.hero-bg');
-      if (heroBg) heroBg.style.backgroundImage = "url('" + d.hero_bg_image + "')";
+      if (heroBg) {
+        // 兼容 <img> 标签和 <div> 标签
+        if (heroBg.tagName === 'IMG') {
+          heroBg.src = d.hero_bg_image;
+        } else {
+          heroBg.style.backgroundImage = "url('" + d.hero_bg_image + "')";
+        }
+      }
     }
 
     // ── 2. Hero Stats ──────────────────────────────────────────

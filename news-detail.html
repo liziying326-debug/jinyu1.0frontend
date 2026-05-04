@@ -500,7 +500,6 @@
             <a href="/about#company-profile" data-i18n="nav.about_sub.companyProfile">Company Profile</a>
             <a href="/about#factory" data-i18n="nav.about_sub.factory">Factory</a>
             <a href="/about#production-capacity" data-i18n="nav.about_sub.productionCapacity">Production Capacity</a>
-            <a href="/about#certificates" data-i18n="nav.about_sub.certificates">Certificates</a>
           </div>
         </li>
         <li class="nav-item"><a href="/contact" class="nav-link" data-i18n="nav.contactUs">Contact Us</a></li>
@@ -719,9 +718,6 @@
         <a href="/about#company-profile" data-i18n="footer.company.profile">Company Profile</a>
 
         <a href="/about#factory" data-i18n="footer.company.factory">Factory</a>
-
-        <a href="/about#certificates" data-i18n="footer.company.certificates">Certificates</a>
-
         <a href="/case-studies" data-i18n="footer.company.cases">Case Studies</a>
 
         <a href="/news" data-i18n="footer.company.news">News</a>
@@ -909,10 +905,14 @@
     text = text.replace(/^## (.+)$/gm, '<h2>$1</h2>');
     text = text.replace(/^# (.+)$/gm, '<h2>$1</h2>');
     text = text.replace(/^- (.+)$/gm, '<li>$1</li>');
-    text = text.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
-    text = text.split('\n\n').map(function(p) {
+    text = text.replace(/(<li>.*<\/li>
+?)+/g, '<ul>$&</ul>');
+    text = text.split('
+
+').map(function(p) {
       if (p.match(/^<(h2|ul|ol)/)) return p;
-      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+      return '<p>' + p.replace(/
+/g, '<br>') + '</p>';
     }).join('');
     return text;
   }
@@ -1209,10 +1209,15 @@ window.addEventListener('scroll', function() {
 });
 
 // Social Icons (动态加载)
-if (typeof loadSocialIcons === 'function') {
-  loadSocialIcons('#nav-social-icons', { maxCount: 3 });
-  loadSocialIcons('#footer-social-icons', { brandColor: true });
-}
+// 确保在 api.js 加载完成后再执行
+window.addEventListener(.DOMContentLoaded., function() {
+  if (typeof loadSocialIcons === .function.) {
+    loadSocialIcons(.#nav-social-icons., { maxCount: 3 });
+    loadSocialIcons(.#footer-social-icons., { brandColor: true });
+  } else {
+    console.warn(. [Social Icons] loadSocialIcons function not found .);
+  }
+});
 </script>
 
 </body>

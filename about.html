@@ -696,9 +696,6 @@ function closeFactoryLightbox(e) {
         <a href="/about#company-profile" data-i18n="footer.company.profile">Company Profile</a>
 
         <a href="/about#factory" data-i18n="footer.company.factory">Factory</a>
-
-        <a href="/about#certificates" data-i18n="footer.company.certificates">Certificates</a>
-
         <a href="/case-studies" data-i18n="footer.company.cases">Case Studies</a>
 
         <a href="/news" data-i18n="footer.company.news">News</a>
@@ -1136,10 +1133,15 @@ initSEO({ pageTitle: 'About Us' });
 })();
 
 // Social Icons (动态加载)
-if (typeof loadSocialIcons === 'function') {
-  loadSocialIcons('#nav-social-icons', { maxCount: 3 });
-  loadSocialIcons('#footer-social-icons', { brandColor: true });
-}
+// 确保在 api.js 加载完成后再执行
+window.addEventListener('DOMContentLoaded', function() {
+  if (typeof loadSocialIcons === 'function') {
+    loadSocialIcons('#nav-social-icons', { maxCount: 3 });
+    loadSocialIcons('#footer-social-icons', { brandColor: true });
+  } else {
+    console.warn('[Social Icons] loadSocialIcons function not found');
+  }
+});
 
 // About页面图片（Our Journey图片同步）
 if (typeof applyAboutImages === 'function') {

@@ -63,7 +63,6 @@
             <a href="/about#company-profile" data-i18n="nav.about_sub.companyProfile">Company Profile</a>
             <a href="/about#factory" data-i18n="nav.about_sub.factory">Factory</a>
             <a href="/about#production-capacity" data-i18n="nav.about_sub.productionCapacity">Production Capacity</a>
-            <a href="/about#certificates" data-i18n="nav.about_sub.certificates">Certificates</a>
           </div>
         </li>
         <li class="nav-item"><a href="/contact" class="nav-link" data-i18n="nav.contactUs">Contact Us</a></li>
@@ -494,7 +493,6 @@
         <h4 style="margin-top:20px;" data-i18n="footer.companyTitle">Company</h4>
         <a href="/about#company-profile" data-i18n="footer.company.profile">Company Profile</a>
         <a href="/about#factory" data-i18n="footer.company.factory">Factory</a>
-        <a href="/about#certificates" data-i18n="footer.company.certificates">Certificates</a>
         <a href="/case-studies" data-i18n="footer.company.cases">Case Studies</a>
         <a href="/news" data-i18n="footer.company.news">News</a>
       </div>
@@ -1100,11 +1098,16 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeSuccessModal({target: document.getElementById('successModal')});
 });
 
-// ── 社交媒体图标（从后台动态加载） ──
-if (typeof loadSocialIcons === 'function') {
-  loadSocialIcons('#nav-social-icons', { maxCount: 3 });                         // 导航栏图标（最多3个）
-  loadSocialIcons('#footer-social-icons', { brandColor: true });                 // Footer 图标（品牌色）
-}
+// ── 社交媒体图标（从后台动态加载）───
+// 确保在 api.js 加载完成后再执行
+window.addEventListener('DOMContentLoaded', function() {
+  if (typeof loadSocialIcons === 'function') {
+    loadSocialIcons('#nav-social-icons', { maxCount: 3 });                         // 导航栏图标（最多3个）
+    loadSocialIcons('#footer-social-icons', { brandColor: true });                 // Footer 图标（品牌色）
+  } else {
+    console.warn('[Social Icons] loadSocialIcons function not found');
+  }
+});
 
 // ── About区块图片：从后台 timeline_image 联动，有则替换，无则保持默认 ──
 (function() {

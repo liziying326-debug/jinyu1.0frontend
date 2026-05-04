@@ -757,12 +757,18 @@ body.menu-open {
   background: var(--primary);
   box-sizing: border-box;
 }
+.hero-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+/* 保留 .hero-bg 作为备用（如果有JS动态设置background-image） */
 .hero-bg {
   position: absolute;
   inset: 0;
-  background-image:
-    url('https://images.unsplash.com/photo-1565361987956-9be6e2b9e6e5?w=1920&q=80'),
-    url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1920&q=80');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

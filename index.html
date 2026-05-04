@@ -245,42 +245,42 @@
     <div id="homeAppsGrid" class="grid-3" style="gap:20px;">
       <!-- 静态兜底，API加载后会替换 -->
       <div class="app-card" onclick="location.href='/applications#sign-board'">
-        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=700&q=75" alt="Sign Board" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=700&q=75" alt="Sign Board" width="700" height="500" loading="lazy" />
         <div class="app-card-overlay">
           <h3 data-i18n="home.apps.signBoard.title" data-i18n-vi="Biển hiệu">Sign Board</h3>
           <p data-i18n="home.apps.signBoard.desc" data-i18n-vi="Biển hiệu bán lẻ, mặt tiền cửa hàng, biển doanh nghiệp">Retail signage, shop fronts, business signs</p>
         </div>
       </div>
       <div class="app-card" onclick="location.href='/applications#light-box'">
-        <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=700&q=75" alt="Light Box" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=700&q=75" alt="Light Box" width="700" height="500" loading="lazy" />
         <div class="app-card-overlay">
           <h3 data-i18n="home.apps.lightBox.title" data-i18n-vi="Hộp đèn">Light Box</h3>
           <p data-i18n="home.apps.lightBox.desc" data-i18n-vi="Quảng cáo có đèn, màn hình trung tâm thương mại">Illuminated advertising, mall displays</p>
         </div>
       </div>
       <div class="app-card" onclick="location.href='/applications#outdoor-advertising'">
-        <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=700&q=75" alt="Outdoor Advertising" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=700&q=75" alt="Outdoor Advertising" width="700" height="500" loading="lazy" />
         <div class="app-card-overlay">
           <h3 data-i18n="home.apps.outdoor.title" data-i18n-vi="Quảng cáo ngoài trờ">Outdoor Advertising</h3>
           <p data-i18n="home.apps.outdoor.desc" data-i18n-vi="Biển quảng cáo, băng rôn, biển hiệu đường phố">Billboards, banners, street signage</p>
         </div>
       </div>
       <div class="app-card" onclick="location.href='/applications#digital-printing'">
-        <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=700&q=75" alt="Digital Printing" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=700&q=75" alt="Digital Printing" width="700" height="500" loading="lazy" />
         <div class="app-card-overlay">
           <h3 data-i18n="home.apps.digital.title" data-i18n-vi="In kỹ thuật số">Digital Printing</h3>
           <p data-i18n="home.apps.digital.desc" data-i18n-vi="In UV, chất nền in dung môi">UV printing, solvent printing substrates</p>
         </div>
       </div>
       <div class="app-card" onclick="location.href='/applications#exhibition-display'">
-        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=700&q=75" alt="Exhibition Display" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=700&q=75" alt="Exhibition Display" width="700" height="500" loading="lazy" />
         <div class="app-card-overlay">
           <h3 data-i18n="home.apps.exhibition.title" data-i18n-vi="Trưng bày triển lãm">Exhibition Display</h3>
           <p data-i18n="home.apps.exhibition.desc" data-i18n-vi="Gian hàng hội chợ, standee, màn hình pop-up">Trade show stands, roll-ups, pop-up displays</p>
         </div>
       </div>
       <div class="app-card" onclick="location.href='/applications#sign-board'">
-        <img src="https://images.unsplash.com/photo-1605117882932-f9e32b03fea9?w=700&q=75" alt="Vehicle Graphics" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1605117882932-f9e32b03fea9?w=700&q=75" alt="Vehicle Graphics" width="700" height="500" loading="lazy" />
         <div class="app-card-overlay">
           <h3 data-i18n="home.apps.vehicle.title" data-i18n-vi="Đồ họa xe">Vehicle Graphics</h3>
           <p data-i18n="home.apps.vehicle.desc" data-i18n-vi="Dán xe, thương hiệu đội xe, phim cửa sổ">Vehicle wraps, fleet branding, window films</p>
@@ -385,7 +385,7 @@
       </div>
       <div>
         <div style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);">
-          <img id="aboutMainImage" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" alt="Jin Yu Factory" style="width:100%;height:400px;object-fit:cover;" />
+          <img id="aboutMainImage" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" alt="Jin Yu Factory" width="800" height="400" style="width:100%;height:400px;object-fit:cover;" />
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
           <div style="background:var(--primary);border-radius:var(--radius);padding:20px;text-align:center;">
@@ -1033,7 +1033,7 @@ document.addEventListener('langChange', (e) => {
       return '<div class="card product-card" onclick="location.href=\'/products/' + encodeURIComponent(p.id) + '\'" style="cursor:pointer;">' +
         '<div class="card-img">' +
         (hasImg
-          ? '<img src="' + img + '" alt="' + name + '" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
+          ? '<img src="' + img + '" alt="' + name + '" width="400" height="300" loading="lazy" decoding="async" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
           : ''
         ) +
         '<div class="card-placeholder" style="display:' + (hasImg ? 'none' : 'flex') + ';">' +
@@ -1149,7 +1149,7 @@ if (typeof loadSocialIcons === 'function') {
       var slug = item.slug || ('app-' + item.id);
       var imgSrc = item.image || (Array.isArray(item.images) && item.images[0]) || '';
       var imgTag = imgSrc
-        ? '<img src="' + imgSrc + '" alt="' + name + '" loading="lazy" onerror="this.src=\'\'"/>'
+        ? '<img src="' + imgSrc + '" alt="' + name + '" width="700" height="500" loading="lazy" decoding="async" onerror="this.src=\'\'"/>'
         : '<div style="width:100%;height:100%;background:linear-gradient(135deg,#e0f2fe,#bfdbfe);display:flex;align-items:center;justify-content:center;font-size:40px;">📌</div>';
       return '<div class="app-card" onclick="location.href=\'/applications#' + slug + '\'">' +
                imgTag +
@@ -1259,7 +1259,7 @@ if (typeof loadSocialIcons === 'function') {
       var images = Array.isArray(item.images) ? item.images : [];
       var imgSrc = images[0] || '';
       var imgTag = imgSrc
-        ? '<img src="' + imgSrc + '" alt="' + title + '" loading="lazy" onerror="this.style.display=\'none\'">'
+        ? '<img src="' + imgSrc + '" alt="' + title + '" width="400" height="200" loading="lazy" decoding="async" onerror="this.style.display=\'none\'">'
         : '<div style="width:100%;height:200px;background:linear-gradient(135deg,#e0f2fe,#bfdbfe);display:flex;align-items:center;justify-content:center;font-size:40px;">📋</div>';
       return '<div class="card" onclick="location.href=\'/case-studies#' + slug + '\'" style="cursor:pointer;">' +
                '<div class="card-img">' + imgTag + '</div>' +

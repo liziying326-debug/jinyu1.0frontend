@@ -1,6 +1,8 @@
 // API Client - 不影响原有i18n.js功能
 // 只在需要动态加载数据时使用
 
+console.log('api.js loaded'); // 调试日志
+
 // ✅ 修复：正确指向后台 3006 端口
 const API_BASE = window.location.origin;
 

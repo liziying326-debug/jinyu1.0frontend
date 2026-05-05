@@ -92,7 +92,7 @@
 </div>
 
 <!-- CATEGORY TABS -->
-<div id="ncatTabsBar" style="background:white;border-bottom:1px solid var(--gray-200);position:sticky;top:72px;z-index:10;">
+<div id="ncatTabsBar" style="background:white;border-bottom:2px solid #e5e7eb;position:sticky;top:72px;z-index:90;transition:box-shadow 0.3s;">
   <div class="container" style="position:relative;">
     <div id="ncatTabsScroll" style="display:flex;gap:4px;padding:12px 0;overflow-x:auto;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;">
       <button class="ncat-tab active" data-cat="industry-knowledge" onclick="switchNewsCat('industry-knowledge')" data-i18n="news_page.industryKnowledge">Industry Knowledge</button>
@@ -103,6 +103,7 @@
     <div id="ncatFadeRight" style="display:none;position:absolute;right:0;top:0;bottom:0;width:48px;pointer-events:none;background:linear-gradient(to right,transparent,white);"></div>
   </div>
 </div>
+<div id="ncatTabsPlaceholder"></div>
 
 <!-- ═══ API-driven blog sections ═══ -->
 <div id="blogApiSections"></div>
@@ -930,7 +931,8 @@
         <a href="/about#company-profile" data-i18n="footer.company.profile">Company Profile</a>
 
         <a href="/about#factory" data-i18n="footer.company.factory">Factory</a>
-        <a href="/case-studies" data-i18n="footer.company.cases">Case Studies</a>
+
+                <a href="/case-studies" data-i18n="footer.company.cases">Case Studies</a>
 
         <a href="/news" data-i18n="footer.company.news">News</a>
 
@@ -1091,18 +1093,20 @@ function switchNewsCat(catId) {
   }
 }
 
-// News dropdown: click to switch tab
+// News dropdown: click to switch tab (事件委托，支持动态更新)
 (function() {
-  var newsDropdown = document.querySelector('.nav-item .nav-link.active')?.parentElement?.querySelector('.dropdown');
+  var newsNavItem = document.querySelector('.nav-item .nav-link.active')?.closest('.nav-item');
+  if (!newsNavItem) return;
+  var newsDropdown = newsNavItem.querySelector('.dropdown');
   if (!newsDropdown) return;
-  newsDropdown.querySelectorAll('a').forEach(function(link) {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      var targetId = this.getAttribute('href');
-      if (targetId && targetId.startsWith('#')) {
-        switchNewsCat(targetId.replace('#', ''));
-      }
-    });
+  newsDropdown.addEventListener('click', function(e) {
+    var link = e.target.closest('a');
+    if (!link) return;
+    e.preventDefault();
+    var targetId = link.getAttribute('href');
+    if (targetId && targetId.startsWith('#')) {
+      switchNewsCat(targetId.replace('#', ''));
+    }
   });
 })();
 
@@ -1183,15 +1187,47 @@ document.addEventListener('keydown', function(e) {
 initSEO({ pageTitle: 'News' });
 
 // Social Icons (动态加载)
-// 确保在 api.js 加载完成后再执行
-window.addEventListener(.DOMContentLoaded., function() {
-  if (typeof loadSocialIcons === .function.) {
-    loadSocialIcons(.#nav-social-icons., { maxCount: 3 });
-    loadSocialIcons(.#footer-social-icons., { brandColor: true });
-  } else {
-    console.warn(. [Social Icons] loadSocialIcons function not found .);
+if (typeof loadSocialIcons === 'function') {
+  loadSocialIcons('#nav-social-icons', { maxCount: 3 });
+  loadSocialIcons('#footer-social-icons', { brandColor: true });
+}
+</script>
+
+
+
+<script>
+// 固定 Tab 栏
+(function() {
+  var tabsBar = document.getElementById('ncatTabsBar');
+  if (!tabsBar) return;
+  var placeholder = document.createElement('div');
+  placeholder.id = 'ncatTabsPlaceholder';
+  tabsBar.parentNode.insertBefore(placeholder, tabsBar.nextSibling);
+  function onScroll() {
+    var navbar = document.getElementById('navbar');
+    var threshold = navbar ? navbar.offsetHeight : 72;
+    if (window.scrollY > threshold) {
+      tabsBar.style.position = 'fixed';
+      tabsBar.style.top = threshold + 'px';
+      tabsBar.style.left = '0';
+      tabsBar.style.right = '0';
+      tabsBar.style.zIndex = '90';
+      tabsBar.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+      placeholder.style.height = tabsBar.offsetHeight + 'px';
+      placeholder.style.display = 'block';
+    } else {
+      tabsBar.style.position = '';
+      tabsBar.style.top = '';
+      tabsBar.style.left = '';
+      tabsBar.style.right = '';
+      tabsBar.style.zIndex = '';
+      tabsBar.style.boxShadow = '';
+      placeholder.style.display = 'none';
+    }
   }
-});
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+})();
 </script>
 
 </body>

@@ -43,6 +43,22 @@
       text-decoration: none;
     }
     .whatsapp-float:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(37,211,102,0.55); }
+    .faq-item { border-bottom: 1px solid var(--gray-200); }
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--primary);
+      gap: 16px;
+    }
+    .faq-question .arrow { font-size: 12px; transition: transform 0.25s; flex-shrink: 0; }
+    .faq-answer { padding: 0 0 18px; font-size: 14px; color: var(--gray-700); line-height: 1.75; display: none; }
+    .faq-item.open .faq-answer { display: block; }
+    .faq-item.open .faq-question .arrow { transform: rotate(180deg); }
   </style>
   <script src="/api.js?v=20260504"></script>
   <script src="/mobile-menu.js"></script>
@@ -296,6 +312,216 @@
   </div>
 </section>
 
+<!-- ========== QUOTE & FAQ ========== -->
+<section class="section bg-light" id="quote-faq">
+  <div class="container">
+    <div class="grid-2">
+      <!-- Left: Quote Form -->
+      <div class="quote-form-box">
+        <h2 class="quote-title" data-i18n="quoteForm.title">Send Us Your Project Details</h2>
+        <p class="quote-subtitle" data-i18n="quoteForm.subtitle">Get a Quote Within 24 Hours</p>
+        <form id="quoteFormFaq" class="quote-form" onsubmit="handleFaqFormSubmit(event)">
+          <div class="form-group">
+            <label for="quote-name" data-i18n="quoteForm.name">Name *</label>
+            <input type="text" id="quote-name" name="name" class="form-input" data-i18n-placeholder="quoteForm.namePlaceholder" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <label for="quote-email" data-i18n="quoteForm.email">Email *</label>
+            <input type="email" id="quote-email" name="email" class="form-input" data-i18n-placeholder="quoteForm.emailPlaceholder" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="quote-phone" data-i18n="quoteForm.phone">Phone *</label>
+            <input type="tel" id="quote-phone" name="phone" class="form-input" data-i18n-placeholder="quoteForm.phonePlaceholder" placeholder="+86 xxx xxxx xxxx" required>
+          </div>
+          <div class="form-group">
+            <label for="quote-message" data-i18n="quoteForm.message">Message *</label>
+            <textarea id="quote-message" name="message" class="form-textarea" data-i18n-placeholder="quoteForm.messagePlaceholder" placeholder="Tell us about your project..." rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; justify-content: center;" data-i18n="quoteForm.submit">Submit</button>
+          <div id="faqFormSuccess" style="display:none;color:#16a34a;text-align:center;padding:16px;font-weight:600;" data-i18n="form.sentSuccess">✅ Sent! We'll reply within 24 hours.</div>
+        </form>
+      </div>
+
+      <!-- Right: FAQ -->
+      <div class="faq-box">
+        <div class="faq-header">
+          <span class="faq-icon">❓</span>
+          <h2 class="faq-title" data-i18n="faq.title">We're Here to Answer All Your Questions</h2>
+        </div>
+        <div class="faq-tabs">
+          <button class="faq-tab active" data-tab="products" data-i18n="faq.tab_products">Products</button>
+          <button class="faq-tab" data-tab="ordering" data-i18n="faq.tab_ordering">Ordering & Payment</button>
+          <button class="faq-tab" data-tab="shipping" data-i18n="faq.tab_shipping">Shipping & Delivery</button>
+          <button class="faq-tab" data-tab="quality" data-i18n="faq.tab_quality">Quality & Certification</button>
+        </div>
+        <div class="faq-content show" id="products-faq">
+          <!-- FAQ 1: Expanded -->
+          <div class="faq-item expanded">
+            <div class="faq-question">
+              <span data-i18n="faq.q1_1">What are your main products?</span>
+              
+              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+            <div class="faq-answer show" data-i18n="faq.a1_1">
+              We specialize in Self Adhesive Vinyl, PVC Flex Banner, Cutting Plotter Film, Acrylic Sheet, PVC Foam Board, and Display Equipment. We also offer custom specifications according to your requirements.
+            </div>
+          </div>
+          <!-- FAQ 2: Collapsed -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <span data-i18n="faq.q1_2">Do you offer custom sizes and specifications?</span>
+              
+              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+            <div class="faq-answer" data-i18n="faq.a1_2">
+              Yes, we offer custom sizes, thickness, and specifications. Please provide your detailed requirements, and our team will provide a solution tailored to your needs.
+            </div>
+          </div>
+          <!-- FAQ 3: Collapsed -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <span data-i18n="faq.q1_3">What is your minimum order quantity (MOQ)?</span>
+              
+              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+            <div class="faq-answer" data-i18n="faq.a1_3">
+              Our MOQ varies by product type. Generally, it's 100 pieces for standard products. For custom orders, please contact us directly for specific requirements.
+            </div>
+          </div>
+        </div>
+        <div class="faq-content" id="ordering-faq">
+          <!-- FAQ 1: Collapsed -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <span data-i18n="faq.q2_1">What payment methods do you accept?</span>
+              
+              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+            <div class="faq-answer" data-i18n="faq.a2_1">
+              We accept T/T (Wire Transfer), PayPal, and Western Union. For new customers, we may require a 30% deposit with the balance paid before shipment.
+            </div>
+          </div>
+          <!-- FAQ 2: Collapsed -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <span data-i18n="faq.q2_2">How long does it take to process my order?</span>
+              
+              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+            <div class="faq-answer" data-i18n="faq.a2_2">
+              Production time varies by product. Standard products ship within 3-7 days. Custom orders may take 10-15 days. We'll provide an estimated delivery date upon order confirmation.
+            </div>
+          </div>
+          <!-- FAQ 3: Collapsed -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <span data-i18n="faq.q2_3">Can I request samples before placing a bulk order?</span>
+              
+              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+            <div class="faq-answer" data-i18n="faq.a2_3">
+              Yes, we offer free samples for standard products. Customers only need to cover the shipping cost. For custom samples, please contact us for pricing.
+            </div>
+          </div>
+        </div>
+        <div class="faq-content" id="shipping-faq">
+          <!-- FAQ 1: Collapsed -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <span data-i18n="faq.q3_1">Do you ship internationally?</span>
+              
+              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+            <div class="faq-answer" data-i18n="faq.a3_1">
+              Yes, we ship to over 50 countries worldwide. We work with major shipping carriers like DHL, FedEx, UPS, and sea freight for larger orders.
+            </div>
+          </div>
+          <!-- FAQ 2: Collapsed -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <span data-i18n="faq.q3_2">What are the shipping costs?</span>
+              
+              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+            <div class="faq-answer" data-i18n="faq.a3_2">
+              Shipping costs depend on destination, weight, and shipping method. We provide competitive rates and will quote you the exact shipping cost when you place your order.
+            </div>
+          </div>
+          <!-- FAQ 3: Collapsed -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <span data-i18n="faq.q3_3">How long does delivery take?</span>
+              
+              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+            <div class="faq-answer" data-i18n="faq.a3_3">
+              Express shipping (DHL/FedEx/UPS) takes 5-7 business days. Sea freight takes 25-35 days depending on the destination country and port.
+            </div>
+          </div>
+        </div>
+        <div class="faq-content" id="quality-faq">
+          <!-- FAQ 1: Collapsed -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <span data-i18n="faq.q4_1">Are your products certified?</span>
+              
+              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+            <div class="faq-answer" data-i18n="faq.a4_1">
+              Yes, we are ISO 9001:2015 certified. Our products meet international quality standards and are exported to Europe, Americas, Southeast Asia, and Middle East markets.
+            </div>
+          </div>
+          <!-- FAQ 2: Collapsed -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <span data-i18n="faq.q4_2">Do you offer quality guarantees?</span>
+              
+              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+            <div class="faq-answer" data-i18n="faq.a4_2">
+              Absolutely! We offer a 100% quality guarantee. If you receive defective products, we will replace them free of charge or provide a full refund.
+            </div>
+          </div>
+          <!-- FAQ 3: Collapsed -->
+          <div class="faq-item">
+            <div class="faq-question">
+              <span data-i18n="faq.q4_3">Can you provide test reports or samples?</span>
+              
+              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+            <div class="faq-answer" data-i18n="faq.a4_3">
+              Yes, we can provide test reports, certificates, and samples upon request. Our quality control team conducts thorough inspections before shipment.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <footer class="footer">
 
@@ -421,6 +647,11 @@
 
 <!-- FLOAT ACTION BUTTONS -->
 <div class="fab-container">
+  <button class="fab-btn fab-top" id="fabTop" title="Back to Top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+  </button>
+  <a href="#quote-faq" class="fab-btn fab-faq" title="Go to FAQ">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12l7 7 7-7"/></svg>
   </a>
   <a href="https://wa.me/8613808828019" target="_blank" class="fab-btn fab-wa" title="Chat on WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -638,8 +869,112 @@ async function handleFormSubmit(e) {
   }
 }
 
+async function handleFaqFormSubmit(e) {
+  e.preventDefault();
+  const form = document.getElementById('quoteFormFaq');
+  const btn = form.querySelector('button[type="submit"]');
+  const origText = btn.innerHTML;
+  const t = (key, fallback) => (window.i18n && window.i18n.t(key) !== key) ? window.i18n.t(key) : fallback;
+  btn.disabled = true;
+  btn.innerHTML = '⏳ ' + t('form.sending', 'Sending...');
+
+  const fd = new FormData(form);
+  const payload = {
+    name: fd.get('name') || '',
+    email: fd.get('email') || '',
+    phone: fd.get('phone') || '',
+    message: fd.get('message') || '',
+  };
+
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...payload, source: 'contact-faq-form' }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      form.querySelectorAll('input,textarea').forEach(el => el.value = '');
+      const successEl = document.getElementById('faqFormSuccess');
+      if (successEl) successEl.textContent = '✅ ' + t('form.sentSuccess', "Sent! We'll reply within 24 hours.");
+      document.getElementById('faqFormSuccess').style.display = 'block';
+      btn.style.display = 'none';
+    } else {
+      alert(t('form.submitFailed', 'Submit failed: ') + (data.message || ''));
+      btn.disabled = false;
+      btn.innerHTML = origText;
+    }
+  } catch (err) {
+    alert(t('form.networkError', 'Network error, please try again.'));
+    btn.disabled = false;
+    btn.innerHTML = origText;
+  }
+}
+
+function toggleFaq(el) {
+  const item = el.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// FAQ Tab Switching
+document.querySelectorAll('.faq-tab').forEach(tab => {
+  tab.addEventListener('click', function() {
+    // Remove active class from all tabs
+    document.querySelectorAll('.faq-tab').forEach(t => t.classList.remove('active'));
+    // Add active class to clicked tab
+    this.classList.add('active');
+
+    // Hide all FAQ content
+    document.querySelectorAll('.faq-content').forEach(content => {
+      content.classList.remove('show');
+    });
+
+    // Show selected FAQ content
+    const tabName = this.getAttribute('data-tab');
+    document.getElementById(tabName + '-faq').classList.add('show');
+  });
+});
+
+// FAQ Accordion Toggle
+document.querySelectorAll('.faq-question').forEach(question => {
+  question.addEventListener('click', function() {
+    const faqItem = this.parentElement;
+    const answer = faqItem.querySelector('.faq-answer');
+
+    // Toggle expanded state
+    faqItem.classList.toggle('expanded');
+    answer.classList.toggle('show');
+  });
+});
+
+// Quote Form Submission
+document.querySelector('.quote-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const t = (key, fallback) => (window.i18n && window.i18n.t(key) !== key) ? window.i18n.t(key) : fallback;
+  const name = document.getElementById('quote-name').value;
+  const email = document.getElementById('quote-email').value;
+  const phone = document.getElementById('quote-phone').value;
+  const message = document.getElementById('quote-message').value;
+
+  // Simple validation
+  if (!name || !email || !phone || !message) {
+    alert(t('form.requiredFields', 'Please fill in all required fields (*)'));
+    return;
+  }
+
+  // For demo: show success message
+  // In production: send to backend
+  showSuccessModal();
+  this.reset();
 });
 </script>
+<script>
+window.addEventListener('scroll', function() {
+  const fab = document.getElementById('fabTop');
+  if (fab) { if (window.scrollY > 300) fab.classList.add('visible'); else fab.classList.remove('visible'); }
+});
 </script>
 
 <!-- ===== SUCCESS MODAL ===== -->
@@ -681,12 +1016,12 @@ initSEO({ pageTitle: 'Contact Us' });
 
 // Social Icons (动态加载)
 // 确保在 api.js 加载完成后再执行
-window.addEventListener('DOMContentLoaded', function() {
-  if (typeof loadSocialIcons === 'function') {
-    loadSocialIcons('#nav-social-icons', { maxCount: 3 });
-    loadSocialIcons('#footer-social-icons', { brandColor: true });
+window.addEventListener(.DOMContentLoaded., function() {
+  if (typeof loadSocialIcons === .function.) {
+    loadSocialIcons(.#nav-social-icons., { maxCount: 3 });
+    loadSocialIcons(.#footer-social-icons., { brandColor: true });
   } else {
-    console.warn('[Social Icons] loadSocialIcons function not found.');
+    console.warn(. [Social Icons] loadSocialIcons function not found .);
   }
 });
 </script>

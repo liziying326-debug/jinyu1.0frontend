@@ -57,7 +57,6 @@
             <a href="/about#company-profile" data-i18n="nav.about_sub.companyProfile">Company Profile</a>
             <a href="/about#factory" data-i18n="nav.about_sub.factory">Factory</a>
             <a href="/about#production-capacity" data-i18n="nav.about_sub.productionCapacity">Production Capacity</a>
-            <a href="/about#certificates" data-i18n="nav.about_sub.certificates">Certificates</a>
           </div>
         </li>
         <li class="nav-item"><a href="/contact" class="nav-link" data-i18n="nav.contactUs">Contact Us</a></li>
@@ -374,7 +373,6 @@
         <h4 style="margin-top:20px;" data-i18n="footer.companyTitle">Company</h4>
         <a href="/about#company-profile" data-i18n="footer.company.profile">Company Profile</a>
         <a href="/about#factory" data-i18n="footer.company.factory">Factory</a>
-        <a href="/about#certificates" data-i18n="footer.company.certificates">Certificates</a>
         <a href="/case-studies" data-i18n="footer.company.cases">Case Studies</a>
         <a href="/news" data-i18n="footer.company.news">News</a>
       </div>
@@ -682,177 +680,114 @@ document.addEventListener('keydown', function(e) {
   function makeProductSlug(p) {
     var name = p.name_en || p.name || '';
     return name.toLowerCase()
-      .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '-')
-      .replace(/^-+|-+$/g, '')
-      || p.id;
+      .replace(/[^a-z0-9]/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
   }
 
-  // 渲染单个产品卡片（异步，支持自动翻译）
-  async function renderCard(p, lang) {
-    const name = await pickLang(p, 'name', lang);
-    const btn  = (window.i18n ? window.i18n.t('products.viewDetail') : 'View Details');
-    const img  = getProductImage(p);
-    const slug = makeProductSlug(p);
-    const imgHtml = img
-      ? `<img src="${img}" alt="${name}" loading="lazy" onerror="this.style.opacity=0.3">`
-      : `<div style="width:100%;height:100%;background:linear-gradient(135deg,#f0f0f0,#e8e8e8);display:flex;align-items:center;justify-content:center;color:#aaa;font-size:12px;">No Image</div>`;
-    return `
-<div class="product-card-new" id="${p.id}" onclick="location.href='/products/${slug}'">
-  <div class="pcn-img">
-    ${imgHtml}
-    <div class="pcn-overlay">
-      <a href="/products/${slug}" class="pcn-btn pcn-detail-btn" onclick="event.stopPropagation()">${btn}</a>
-    </div>
-  </div>
-  <div class="pcn-body">
-    <h3 class="pcn-name">${name}</h3>
-  </div>
-</div>`;
-  }
-
-  // 渲染分类面板（异步）
-  async function renderPanel(cat, products, lang) {
-    const slug = cat.slug || cat.id;
-    const catLabel = await pickLang(cat, 'name', lang) || cat.name_en || slug;
-    const catDesc  = await pickLang(cat, 'description', lang) || cat.description_en || '';
-    const catProducts = products.filter(p => p.category_id === slug);
-    const cards = (await Promise.all(catProducts.map(p => renderCard(p, lang)))).join('');
-    const isActive = (slug === currentCat);
-    return `
-<div class="pcat-panel" id="panel-${slug}" ${isActive ? '' : 'style="display:none"'}>
-  <div class="container" style="padding-top:48px;">
-    <div class="pcat-section-header">
-      <h2>${catLabel}</h2>
-      <p>${catDesc}</p>
-    </div>
-    <div class="pcat-grid">${cards || '<p style="color:#aaa;padding:24px 0;">No products in this category.</p>'}</div>
-  </div>
-</div>`;
-  }
-
-  // 渲染分类 Tab 栏（异步）
-  async function renderTabs(categories, products, lang) {
-    const tabsList = document.getElementById('pcatTabsList');
-    if (!tabsList) return;
-    const tabHtmls = await Promise.all(categories.map(async cat => {
-      const slug     = cat.slug || cat.id;
-      const icon     = CAT_ICONS[slug] || CAT_ICONS['_default'];
-      const label    = await pickLang(cat, 'name', lang) || cat.name_en || slug;
-      const count    = products.filter(p => p.category_id === slug).length;
-      const isActive = slug === currentCat;
-      return `<button class="pcat-tab${isActive?' active':''}" data-cat="${slug}" onclick="switchCat('${slug}')">
-  <span class="pcat-icon">${icon}</span>
-  <span class="pcat-label">${label}</span>
-  <span class="pcat-count" data-cat-count>${count}</span>
-</button>`;
-    }));
-    tabsList.innerHTML = tabHtmls.join('');
-  }
-
-  // 更新 Tab 上的数量徽章
-  function updateCounts(products) {
-    document.querySelectorAll('.pcat-tab').forEach(btn => {
-      const cat   = btn.getAttribute('data-cat');
-      const count = products.filter(p => p.category_id === cat).length;
-      const badge = btn.querySelector('[data-cat-count]');
-      if (badge) badge.textContent = count;
-    });
-  }
-
-  // 主渲染（改为 async）
-  async function renderAll(products, categories) {
-    const lang = getLang();
-    const container = document.getElementById('pcatContent');
-    if (!container) return;
-    // 渲染 Tabs
-    await renderTabs(categories, products, lang);
-    // 渲染内容面板
-    const panels = await Promise.all(categories.map(cat => renderPanel(cat, products, lang)));
-    container.innerHTML = panels.join('');
-    if (window.applyI18n) window.applyI18n();
-  }
-
-  // 加载所有数据
-  async function loadAll() {
+  // 加载分类和产品数据
+  async function loadData() {
     try {
-      const [prodResp, catResp] = await Promise.all([
-        fetch('/api/products'),
-        fetch('/api/categories')
-      ]);
-      const prodJson = await prodResp.json();
-      const catJson  = await catResp.json();
-
-      // 兼容多种API格式: 数组 或 {success: true, data: [...]} 或 {value: [...], Count: N}
-      allProducts   = Array.isArray(prodJson) ? prodJson : (prodJson.success ? prodJson.data : (prodJson.value || []));
-      allCategories = Array.isArray(catJson) ? catJson : (catJson.success ? catJson.data : (catJson.value || []));
-
-      // 按 sort_order 排序
-      allCategories.sort((a, b) => (parseInt(a.sort_order)||0) - (parseInt(b.sort_order)||0));
-
-      // 确定初始分类
-      if (!currentCat && allCategories.length > 0) {
-        currentCat = allCategories[0].slug || allCategories[0].id;
-      }
-
-      renderAll(allProducts, allCategories);
-
-      // 隐藏 loading
-      const loading = document.getElementById('pcatLoading');
+      // 加载分类
+      var catResp = await fetch('/api/categories');
+      var categories = catResp.ok ? await catResp.json() : [];
+      allCategories = Array.isArray(categories) ? categories : (categories.data || []);
+      
+      // 加载产品
+      var prodResp = await fetch('/api/products');
+      var productsData = prodResp.ok ? await prodResp.json() : null;
+      allProducts = productsData && productsData.success ? productsData.data : (Array.isArray(productsData) ? productsData : []);
+      
+      // 渲染分类标签
+      renderCategories();
+      
+      // 渲染产品
+      renderProducts();
+      
+      // 隐藏加载提示
+      var loading = document.getElementById('pcatLoading');
       if (loading) loading.style.display = 'none';
-
-    } catch(e) {
-      const el = document.getElementById('pcatLoading');
-      if (el) el.innerHTML = '<p style="color:#f87171;">Failed to load products. Please refresh.</p>';
+    } catch (e) {
+      console.error('[Products] loadData failed:', e);
     }
   }
 
-  // 语言切换时重新渲染
-  window.addEventListener('storage', function(e) {
-    if (e.key === 'lang' && allProducts.length > 0) renderAll(allProducts, allCategories);
-  });
-
-  // ── 语言切换拦截：页面加载且数据就绪后，才拦截 i18n.changeLanguage ──
-  // 这样可以确保无论 langChange 事件是否正常工作，页面都能响应语言切换
-  if (window.i18n) {
-    var originalChangeLanguage = window.i18n.changeLanguage.bind(window.i18n);
-    window.i18n.changeLanguage = async function(lang) {
-      await originalChangeLanguage(lang);
-      // 语言切换完成后，重新渲染产品列表
-      if (allProducts.length > 0) renderAll(allProducts, allCategories);
-    };
+  // 渲染分类标签
+  function renderCategories() {
+    var tabsList = document.getElementById('pcatTabsList');
+    if (!tabsList) return;
+    
+    var html = allCategories.map(function(cat) {
+      var name = cat.name_en || cat.name || '';
+      var slug = cat.slug || cat.id || '';
+      return '<button class="pcat-tab" data-cat="' + slug + '">' + name + '</button>';
+    }).join('');
+    
+    tabsList.innerHTML = html;
+    
+    // 添加点击事件
+    tabsList.querySelectorAll('.pcat-tab').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        switchCat(this.dataset.cat);
+      });
+    });
+    
+    // 默认选中第一个
+    if (allCategories.length > 0) {
+      switchCat(allCategories[0].slug || allCategories[0].id);
+    }
   }
 
-  document.addEventListener('langChange', function() {
-    if (allProducts.length > 0) renderAll(allProducts, allCategories);
-  });
+  // 渲染产品
+  function renderProducts(category) {
+    var content = document.getElementById('pcatContent');
+    if (!content) return;
+    
+    var filtered = category 
+      ? allProducts.filter(function(p) { return (p.category_id || p.category) === category; })
+      : allProducts;
+    
+    var lang = getLang();
+    var html = filtered.map(function(p) {
+      var name = (pickLangSync && pickLangSync(p, 'name', lang)) || p.name_en || p.name || '';
+      var desc = (pickLangSync && pickLangSync(p, 'description', lang)) || '';
+      var img = getProductImage(p);
+      var slug = makeProductSlug(p);
+      
+      return '<div class="product-card">' +
+               '<a href="/products/' + slug + '" style="text-decoration:none;color:inherit;display:block;">' +
+                 '<div class="card-img">' +
+                   (img ? '<img src="' + img + '" alt="' + name + '" loading="lazy">' : '<div class="card-placeholder"><span>No Image</span></div>') +
+                 '</div>' +
+                 '<div class="card-body">' +
+                   '<h3>' + name + '</h3>' +
+                 '</div>' +
+               '</a>' +
+             '</div>';
+    }).join('');
+    
+    content.innerHTML = html || '<p style="text-align:center;color:#94a3b8;">No products found.</p>';
+  }
 
-  // switchCat 全局暴露
+  // 切换分类
   window.switchCat = function(cat) {
     currentCat = cat;
-    document.querySelectorAll('.pcat-panel').forEach(el => { el.style.display = 'none'; });
-    const target = document.getElementById('panel-' + cat);
-    if (target) target.style.display = '';
-    document.querySelectorAll('.pcat-tab').forEach(btn => {
-      btn.classList.toggle('active', btn.getAttribute('data-cat') === cat);
+    renderProducts(cat);
+    
+    // 更新标签状态
+    document.querySelectorAll('.pcat-tab').forEach(function(btn) {
+      btn.classList.toggle('active', btn.dataset.cat === cat);
     });
-    // 滚动 tab 到视区
-    var activeTab = document.querySelector('.pcat-tab.active');
-    if (activeTab) activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
   };
 
-  // 处理 URL hash 切换分类
-  const hash = location.hash.replace('#','');
-  if (hash) currentCat = hash;
-
-  document.addEventListener('DOMContentLoaded', loadAll);
+  // 页面加载时执行
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadData);
+  } else {
+    loadData();
+  }
 })();
-initSEO({ pageTitle: 'Products' });
-
-// Social Icons (动态加载)
-if (typeof loadSocialIcons === 'function') {
-  loadSocialIcons('#nav-social-icons', { maxCount: 3 });
-  loadSocialIcons('#footer-social-icons', { brandColor: true });
-}
 </script>
+
 </body>
 </html>

@@ -125,22 +125,8 @@
     "prod_about_ms_0_desc": "佛山市金宇广告材料有限公司有限公司正式成立于广东省南海区。最初的产品系列主要集中在PVC泡沫板和自粘性乙烯基，供应国内市场。",
     "prod_about_team_4_role": "生产与质量控制经理",
     "prod_about_team_4_desc": "负责生产管理和全过程质量检测。严格控制原材料、生产工艺和成品检测，确保每批货物均符合出口质量标准",
-    "prod_1778764764736_name": "食物",
-    "prod_aa_name": "When",
-    "prod_about_intro_desc": "简介描述3",
-    "prod_about_business_desc": "业务描述4",
-    "prod_about_export_desc": "导出说明5",
-    "prod_about_values": "值8",
-    "prod_about_location": "中国广州磐宇",
-    "prod_about_team_1_name": "研發部",
-    "prod_about_team_2_name": "主创人员",
-    "prod_about_team_1_role": "技术开发",
-    "prod_about_team_0_role": "出口销售经理",
-    "prod_about_team_2_role": "制造和质量控制",
-    "prod_about_team_0_desc": "国际B2B销售、客户关系和出口文件。所有国际咨询的直接联系方式。",
-    "prod_about_team_1_desc": "产品创新、定制配方、质量控制和技术文档，以实现国际合规。",
-    "prod_about_team_2_desc": "经验丰富的生产人员通过ISO 9001质量程序运营我们扩建的制造工厂。",
-    "prod_1778764764814_name": "食品"
+    "prod_aa_name": "AA",
+    "prod_1778764764736_name": "食物"
   },
   "tl": {
     "prod_1_title": "Proyekto ng Pag-signage ng Supermarket",
@@ -274,7 +260,12 @@
     "prod_about_team_4_role": "Tagapamahala ng Produksyon at Kontrol sa Kalidad",
     "prod_about_team_4_desc": "Namamahala sa pamamahala ng produksyon at inspeksyon ng kalidad ng buong proseso. Mahigpit na kinokontrol ang mga hilaw na materyales, proseso ng produksyon at tapos na pagsubok ng produkto upang matiyak na ang bawat batch ng mga kalakal ay nakakatugon sa mga pamantayan sa kalidad ng pag-export",
     "prod_cold-lamination-film_description": "Mataas na kalidad na Cold Lamination Film para sa advertising at display application.",
-    "prod_1778764764736_name": "pagkain"
+    "prod_1778764764736_name": "pagkain",
+    "prod_category-1779001293077_name": "Pagsubok",
+    "prod_1778923241312_name": "Pagsubok",
+    "prod_1778923301976_name": "DDD",
+    "prod_1779001646618_name": "Ingles",
+    "prod_1779001646618_description": "konteksto"
   },
   "vi": {
     "prod_2_title": "Nâng Cấp Thương Hiệu & Lắp Đặt Biển Hiệu Nhà Hàng Golden Palace",
@@ -409,8 +400,8 @@
     "prod_about_team_4_role": "Quản lý sản xuất & kiểm soát chất lượng",
     "prod_about_team_4_desc": "Chịu trách nhiệm quản lý sản xuất và kiểm tra chất lượng toàn quy trình. Kiểm soát nghiêm ngặt nguyên liệu, quá trình sản xuất và thử nghiệm thành phẩm để đảm bảo mỗi lô hàng hóa đáp ứng tiêu chuẩn chất lượng xuất khẩu",
     "prod_cold-lamination-film_description": "Màng cán nguội chất lượng cao cho các ứng dụng quảng cáo và hiển thị.",
-    "prod_1778764764736_name": "đồ ăn, món ăn",
-    "prod_aa_name": "aa."
+    "prod_aa_name": "A.",
+    "prod_1778764764736_name": "đồ ăn, món ăn"
   },
   "fil": {},
   "en": {

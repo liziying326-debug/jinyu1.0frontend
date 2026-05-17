@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -85,10 +85,10 @@
 <div class="page-banner">
   <div class="container">
     <div class="breadcrumb">
-      <a href="/" data-i18n="nav.home">Home</a><span class="sep">›</span><span class="current" data-i18n="about_page.breadcrumb">About Us</span>
+      <a href="/" data-i18n="nav.home">Home</a><span class="sep">›</span><span class="current" id="abt-breadcrumb" data-i18n="about_page.breadcrumb">About Us</span>
     </div>
-    <h1 data-i18n="about_page.pageTitle">About Foshan Jin Yu</h1>
-    <p data-i18n="about_page.pageSubtitle">Professional advertising materials manufacturer integrating design, R&D, production and global sales since 2009.</p>
+    <h1 id="abt-page-title" data-i18n="about_page.pageTitle">About Foshan Jin Yu</h1>
+    <p id="abt-page-subtitle" data-i18n="about_page.pageSubtitle">Professional advertising materials manufacturer integrating design, R&D, production and global sales since 2009.</p>
   </div>
 </div>
 
@@ -98,12 +98,12 @@
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
       <div>
         <div class="section-header">
-          <div class="label" data-i18n="about_page.companyProfile">Company Profile</div>
-          <h2 id="abt-intro-title" data-i18n="about_page.whoWeAre">Who We Are</h2>
-          <p id="abt-intro-desc" data-i18n="about_page.whoWeAreDesc">Foshan Jin Yu Advertising Material Co., Ltd is a professional manufacturer of advertising materials established in 2009. We are located in the U+Zhigu Industrial Park, LiShui Town, Nanhai District, Foshan City, Guangdong Province – one of China's most concentrated hubs for advertising material production.</p>
+          <div class="label" id="abt-company-profile-label" data-i18n="about_page.companyProfile">Company Profile</div>
+          <h2 id="abt-intro-title">Who We Are</h2>
+          <p id="abt-intro-desc">Foshan Jin Yu Advertising Material Co., Ltd is a professional manufacturer of advertising materials established in 2009. We are located in the U+Zhigu Industrial Park, LiShui Town, Nanhai District, Foshan City, Guangdong Province – one of China's most concentrated hubs for advertising material production.</p>
         </div>
-        <p id="abt-business-desc" style="color:var(--gray-700);line-height:1.8;margin-bottom:20px;" data-i18n="about_page.businessDesc">Our business integrates design, research and development, production and sales of advertising materials including self adhesive vinyl, PVC flex banner, PVC foam board, acrylic sheet, aluminum composite panel, PP hollow sheet, reflective sheeting, display stands and sign-making accessories.</p>
-        <p id="abt-export-desc" style="color:var(--gray-700);line-height:1.8;margin-bottom:28px;" data-i18n="about_page.exportDesc">We export to Southeast Asia, Europe, the Americas, the Middle East and other global markets. Our products are known for durability, customizability, and competitive factory-direct pricing.</p>
+        <p id="abt-business-desc" style="color:var(--gray-700);line-height:1.8;margin-bottom:20px;">Our business integrates design, research and development, production and sales of advertising materials including self adhesive vinyl, PVC flex banner, PVC foam board, acrylic sheet, aluminum composite panel, PP hollow sheet, reflective sheeting, display stands and sign-making accessories.</p>
+        <p id="abt-export-desc" style="color:var(--gray-700);line-height:1.8;margin-bottom:28px;">We export to Southeast Asia, Europe, the Americas, the Middle East and other global markets. Our products are known for durability, customizability, and competitive factory-direct pricing.</p>
       </div>
       <div>
         <img id="abt-company-img" src="/images/acrylic-sheet.svg" alt="Jin Yu Company Overview" style="width:100%;height:420px;object-fit:cover;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);" />
@@ -116,24 +116,24 @@
 <section class="section bg-light">
   <div class="container">
     <div class="section-header center">
-      <div class="label" data-i18n="about_page.ourPurpose">Our Purpose</div>
-      <h2 data-i18n="about_page.missionVisionValues">Mission, Vision &amp; Values</h2>
+      <div class="label" id="abt-our-purpose-label" data-i18n="about_page.ourPurpose">Our Purpose</div>
+      <h2 id="abt-mission-vision-values-title" data-i18n="about_page.missionVisionValues">Mission, Vision &amp; Values</h2>
     </div>
     <div class="grid-3">
       <div class="feature-card" style="text-align:center;">
-        <div class="feature-icon" style="margin:0 auto 18px;">🎯</div>
-        <h3 data-i18n="about_page.mission">Mission</h3>
-        <p id="abt-mission" data-i18n="about_page.missionDesc">To provide advertising professionals and sign-making businesses worldwide with reliable, high-quality materials that enable outstanding creative work at competitive factory-direct prices.</p>
+        <!-- <div class="feature-icon" style="margin:0 auto 18px;">🎯</div> -->
+        <h3  data-i18n="about_page.mission">Mission</h3>
+        <p id="abt-mission">To provide advertising professionals and sign-making businesses worldwide with reliable, high-quality materials that enable outstanding creative work at competitive factory-direct prices.</p>
       </div>
       <div class="feature-card" style="text-align:center;">
-        <div class="feature-icon" style="margin:0 auto 18px;">🔭</div>
+        <!-- <div class="feature-icon" style="margin:0 auto 18px;">🔭</div> -->
         <h3 data-i18n="about_page.vision">Vision</h3>
-        <p id="abt-vision" data-i18n="about_page.visionDesc">To become a globally recognized name in advertising material manufacturing – known for product innovation, quality consistency, and strong long-term customer partnerships.</p>
+        <p id="abt-vision">To become a globally recognized name in advertising material manufacturing – known for product innovation, quality consistency, and strong long-term customer partnerships.</p>
       </div>
       <div class="feature-card" style="text-align:center;">
-        <div class="feature-icon" style="margin:0 auto 18px;">💎</div>
+        <!-- <div class="feature-icon" style="margin:0 auto 18px;">💎</div> -->
         <h3 data-i18n="about_page.values">Values</h3>
-        <p id="abt-values" data-i18n="about_page.valuesDesc">Quality first. Honest dealing. Continuous improvement. Customer-centric development. Every product batch must meet the standard we set for ourselves – not just what's acceptable.</p>
+        <p id="abt-values">Quality first. Honest dealing. Continuous improvement. Customer-centric development. Every product batch must meet the standard we set for ourselves – not just what's acceptable.</p>
       </div>
     </div>
   </div>
@@ -145,42 +145,11 @@
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;">
       <div>
         <div class="section-header">
-          <div class="label" data-i18n="about_page.ourJourney">Our Journey</div>
-          <h2 data-i18n="about_page.companyMilestones">Company Milestones</h2>
-          <p data-i18n="about_page.milestonesDesc">From a fresh start in 2009 to an ISO-certified global exporter – here's how we got here.</p>
+          <div class="label" id="abt-our-journey-label" data-i18n="about_page.ourJourney">Our Journey</div>
+          <h2 id="abt-company-milestones-title" data-i18n="about_page.companyMilestones">Company Milestones</h2>
+          <p id="abt-milestones-desc" data-i18n="about_page.milestonesDesc">From a fresh start in 2009 to an ISO-certified global exporter – here's how we got here.</p>
         </div>
-        <div id="abt-timeline" class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-date">2009 · <span data-i18n="about_page.year1">Year 1</span></div>
-            <h3 data-i18n="about_page.companyEstablished">Company Established</h3>
-            <p data-i18n="about_page.companyEstablishedDesc">Foshan Jin Yu Advertising Material Co., Ltd officially founded in Nanhai District, Foshan. Initial product range focused on PVC foam board and self adhesive vinyl for domestic market supply.</p>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-date"><span data-i18n="about_page.oct2022">October 2022</span></div>
-            <h3 data-i18n="about_page.firstInternational">First International Clients – Canton Fair</h3>
-            <p data-i18n="about_page.firstInternationalDesc">Participated in the Canton Fair (China Import and Export Fair) for the first time. Successfully established partnerships with overseas buyers from Southeast Asia, the Middle East, and Europe.</p>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-date"><span data-i18n="about_page.mar2023">March 2023</span></div>
-            <h3 data-i18n="about_page.rdTeam">R&D Team Established</h3>
-            <p data-i18n="about_page.rdTeamDesc">Dedicated research and development team formed to drive product innovation, custom formulation development, and technical support capabilities for international clients.</p>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-date"><span data-i18n="about_page.jul2023">July 2023</span></div>
-            <h3 data-i18n="about_page.capacityExpanded">Production Capacity Expanded</h3>
-            <p data-i18n="about_page.capacityExpandedDesc">Significant investment in new production lines and advanced equipment. Manufacturing capacity increased substantially to meet growing international order volumes across all product categories.</p>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-date"><span data-i18n="about_page.year2024">2024</span></div>
-            <h3 data-i18n="about_page.isoAchieved">ISO 9001 Certification Achieved</h3>
-            <p data-i18n="about_page.isoAchievedDesc">Successfully completed ISO 9001:2015 quality management system certification. Full quality documentation, process controls, and continuous improvement systems formalized across all operations.</p>
-          </div>
-        </div>
+        <div id="abt-timeline" class="timeline"></div>
       </div>
       <div style="position:sticky;top:100px;">
         <img id="abt-timeline-img" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" alt="Jin Yu Company Timeline" style="width:100%;height:320px;object-fit:cover;border-radius:var(--radius-lg);box-shadow:var(--shadow-md);" />
@@ -222,9 +191,9 @@
 <section class="section bg-light" id="factory">
   <div class="container">
     <div class="section-header center">
-      <div class="label" data-i18n="about_page.factory">Our Factory</div>
-      <h2 data-i18n="about_page.factoryTitle">State-of-the-Art Manufacturing Facility</h2>
-      <p data-i18n="about_page.factoryDesc">Located in U+Zhigu Industrial Park, LiShui Town, Nanhai District – one of Foshan's premium industrial zones dedicated to advanced manufacturing.</p>
+      <div class="label" id="abt-factory-label" data-i18n="about_page.factory">Our Factory</div>
+      <h2 id="abt-factory-title" data-i18n="about_page.factoryTitle">State-of-the-Art Manufacturing Facility</h2>
+      <p id="abt-factory-desc" data-i18n="about_page.factoryDesc">Located in U+Zhigu Industrial Park, LiShui Town, Nanhai District – one of Foshan's premium industrial zones dedicated to advanced manufacturing.</p>
     </div>
     <div id="abt-factory-grid" class="factory-gallery" style="display:flex;justify-content:center;gap:16px;margin-bottom:48px;flex-wrap:wrap;">
       <div class="factory-thumb" onclick="openFactoryLightbox(this)">
@@ -282,42 +251,42 @@ function closeFactoryLightbox(e) {
 <section class="section" id="production-capacity">
   <div class="container">
     <div class="section-header center">
-      <div class="label" data-i18n="about_page.productionCapacity">Production Capacity</div>
-      <h2 data-i18n="about_page.scaleTitle">Scale to Meet Your Volume Requirements</h2>
-      <p data-i18n="about_page.scaleDesc">Following our 2013 capacity expansion, we can handle large-scale orders with consistent quality from first sample to final batch.</p>
+      <div class="label" id="abt-production-capacity-label" data-i18n="about_page.productionCapacity">Production Capacity</div>
+      <h2 id="abt-scale-title" data-i18n="about_page.scaleTitle">Scale to Meet Your Volume Requirements</h2>
+      <p id="abt-scale-desc" data-i18n="about_page.scaleDesc">Following our 2013 capacity expansion, we can handle large-scale orders with consistent quality from first sample to final batch.</p>
     </div>
     <div class="grid-3" style="margin-bottom:48px;">
       <div class="feature-card" style="text-align:center;">
         <div class="feature-icon" style="margin:0 auto 14px;">⚙️</div>
-        <h3 id="cap-title-0" data-i18n="about_page.productionEquipment">Production Equipment</h3>
-        <p id="cap-desc-0" data-i18n="about_page.productionEquipmentDesc">Advanced extrusion lines, calendering equipment, coating machines, and slitting systems expanded in 2013</p>
+        <h3 id="cap-title-0"></h3>
+        <p id="cap-desc-0"></p>
       </div>
       <div class="feature-card" style="text-align:center;">
         <div class="feature-icon" style="margin:0 auto 14px;">🔬</div>
-        <h3 id="cap-title-1" data-i18n="about_page.rdLaboratory">R&D Laboratory</h3>
-        <p id="cap-desc-1" data-i18n="about_page.rdLaboratoryDesc">In-house testing lab and R&D team for custom formulation, product development, and quality verification</p>
+        <h3 id="cap-title-1"></h3>
+        <p id="cap-desc-1"></p>
       </div>
       <div class="feature-card" style="text-align:center;">
         <div class="feature-icon" style="margin:0 auto 14px;">📦</div>
-        <h3 id="cap-title-2" data-i18n="about_page.exportWarehouse">Export Warehouse</h3>
-        <p id="cap-desc-2" data-i18n="about_page.exportWarehouseDesc">Dedicated export packaging zone with moisture-proof and shock-resistant packing for international shipping</p>
+        <h3 id="cap-title-2"></h3>
+        <p id="cap-desc-2"></p>
       </div>
     </div>
     <div class="grid-3">
       <div class="feature-card">
         <div class="feature-icon">📋</div>
-        <h3 id="cap-title-3" data-i18n="about_page.qualityControl">Quality Control Process</h3>
-        <p id="cap-desc-3" data-i18n="about_page.qualityControlDesc">Raw material incoming inspection → in-process quality checks → final product testing → packaging verification → pre-shipment inspection available.</p>
+        <h3 id="cap-title-3"></h3>
+        <p id="cap-desc-3"></p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🚢</div>
-        <h3 id="cap-title-4" data-i18n="about_page.exportLogistics">Export Logistics</h3>
-        <p id="cap-desc-4" data-i18n="about_page.exportLogisticsDesc">FOB Guangzhou / Foshan. LCL and FCL available. We work with major freight forwarders and can assist with customs documentation, COO, and inspection certificates.</p>
+        <h3 id="cap-title-4"></h3>
+        <p id="cap-desc-4"></p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🎨</div>
-        <h3 id="cap-title-5" data-i18n="about_page.oemCustom">OEM / Custom Orders</h3>
-        <p id="cap-desc-5" data-i18n="about_page.oemCustomDesc">Private label packaging, custom specifications, color matching, and dedicated production runs available for established importers and distributors.</p>
+        <h3 id="cap-title-5"></h3>
+        <p id="cap-desc-5"></p>
       </div>
     </div>
   </div>
@@ -330,29 +299,19 @@ function closeFactoryLightbox(e) {
 <section class="section">
   <div class="container">
     <div class="section-header center">
-      <div class="label" data-i18n="about_page.ourTeam">Our Team</div>
-      <h2 data-i18n="about_page.teamTitle">People Behind Jin Yu</h2>
-      <p data-i18n="about_page.teamDesc">Our team combines manufacturing expertise, international trade experience, and technical knowledge to serve global B2B clients professionally.</p>
+      <div class="label" id="abt-our-team-label" data-i18n="about_page.ourTeam">Our Team</div>
+      <h2 id="abt-team-title" data-i18n="about_page.teamTitle">People Behind Jin Yu</h2>
+      <p id="abt-team-desc" data-i18n="about_page.teamDesc">Our team combines manufacturing expertise, international trade experience, and technical knowledge to serve global B2B clients professionally.</p>
     </div>
     <div id="abt-team-grid" class="grid-3" style="max-width:900px;margin:0 auto;">
-      <div style="text-align:center;padding:28px 20px;background:var(--gray-50);border-radius:var(--radius-lg);border:1px solid var(--gray-200);">
-        <div style="width:72px;height:72px;background:linear-gradient(135deg,var(--accent-blue),var(--primary));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;color:white;margin:0 auto 14px;font-family:Montserrat,sans-serif;">V</div>
-        <h3 style="font-size:16px;font-weight:700;color:var(--primary);margin-bottom:4px;" data-i18n="about_page.vivian">Vivian</h3>
-        <div style="font-size:12px;color:var(--accent-blue);font-weight:600;margin-bottom:10px;" data-i18n="about_page.vivianRole">Export Sales Manager</div>
-        <p style="font-size:13px;color:var(--gray-500);" data-i18n="about_page.vivianDesc">International B2B sales, client relations and export documentation. Direct contact for all international enquiries.</p>
-        <a href="mailto:vivian@materials-ad.com" style="display:inline-block;margin-top:12px;font-size:13px;color:var(--accent-blue);font-weight:600;">vivian@materials-ad.com</a>
+      <div class="abt-team-placeholder" style="text-align:center;padding:28px 20px;background:var(--gray-50);border-radius:var(--radius-lg);border:1px solid var(--gray-200);">
+        <p style="font-size:13px;color:var(--gray-500);">Loading team members...</p>
       </div>
-      <div style="text-align:center;padding:28px 20px;background:var(--gray-50);border-radius:var(--radius-lg);border:1px solid var(--gray-200);">
-        <div style="width:72px;height:72px;background:linear-gradient(135deg,var(--orange),#c45c0e);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;color:white;margin:0 auto 14px;font-family:Montserrat,sans-serif;">R</div>
-        <h3 style="font-size:16px;font-weight:700;color:var(--primary);margin-bottom:4px;" data-i18n="about_page.rdDept">R&amp;D Department</h3>
-        <div style="font-size:12px;color:var(--accent-blue);font-weight:600;margin-bottom:10px;" data-i18n="about_page.rdDeptRole">Technical Development Team</div>
-        <p style="font-size:13px;color:var(--gray-500);" data-i18n="about_page.rdDeptDesc">Product innovation, custom formulation, quality control, and technical documentation for international compliance requirements.</p>
+      <div class="abt-team-placeholder" style="text-align:center;padding:28px 20px;background:var(--gray-50);border-radius:var(--radius-lg);border:1px solid var(--gray-200);">
+        <p style="font-size:13px;color:var(--gray-500);">Loading team members...</p>
       </div>
-      <div style="text-align:center;padding:28px 20px;background:var(--gray-50);border-radius:var(--radius-lg);border:1px solid var(--gray-200);">
-        <div style="width:72px;height:72px;background:linear-gradient(135deg,#3a7ab8,var(--primary));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;color:white;margin:0 auto 14px;font-family:Montserrat,sans-serif;">P</div>
-        <h3 style="font-size:16px;font-weight:700;color:var(--primary);margin-bottom:4px;" data-i18n="about_page.productionTeam">Production Team</h3>
-        <div style="font-size:12px;color:var(--accent-blue);font-weight:600;margin-bottom:10px;" data-i18n="about_page.productionTeamRole">Manufacturing &amp; QC</div>
-        <p style="font-size:13px;color:var(--gray-500);" data-i18n="about_page.productionTeamDesc">Experienced production workforce operating our expanded manufacturing facility with ISO 9001 quality procedures.</p>
+      <div class="abt-team-placeholder" style="text-align:center;padding:28px 20px;background:var(--gray-50);border-radius:var(--radius-lg);border:1px solid var(--gray-200);">
+        <p style="font-size:13px;color:var(--gray-500);">Loading team members...</p>
       </div>
     </div>
   </div>
@@ -362,11 +321,11 @@ function closeFactoryLightbox(e) {
   <div class="container">
     <div class="cta-content">
       <div class="cta-text">
-        <h2 data-i18n="about_page.ready">Ready to Start a Partnership?</h2>
-        <p data-i18n="about_page.readyDesc">We welcome inquiries from distributors, importers, sign-making companies, and print shop owners worldwide. Let's build a long-term business relationship.</p>
+        <h2 id="abt-ready-title" data-i18n="about_page.ready">Ready to Start a Partnership?</h2>
+        <p id="abt-ready-desc" data-i18n="about_page.readyDesc">We welcome inquiries from distributors, importers, sign-making companies, and print shop owners worldwide. Let's build a long-term business relationship.</p>
       </div>
       <div class="cta-actions">
-        <a href="/contact" class="btn btn-primary btn-lg" data-i18n="about_page.contactNow">Contact Us Now</a>
+        <a href="/contact" class="btn btn-primary btn-lg" id="abt-contact-now-btn" data-i18n="about_page.contactNow">Contact Us Now</a>
         <a href="https://wa.me/8613808828019" target="_blank" class="btn btn-outline btn-lg" data-i18n="about_page.whatsappNow">WhatsApp</a>
       </div>
     </div>
@@ -408,175 +367,17 @@ function closeFactoryLightbox(e) {
           <span class="faq-icon">❓</span>
           <h2 class="faq-title" data-i18n="faq.title">We're Here to Answer All Your Questions</h2>
         </div>
-        <div class="faq-tabs">
+        <div class="faq-tabs" id="faq-tabs-container">
           <button class="faq-tab active" data-tab="products" data-i18n="faq.tab_products">Products</button>
           <button class="faq-tab" data-tab="ordering" data-i18n="faq.tab_ordering">Ordering & Payment</button>
           <button class="faq-tab" data-tab="shipping" data-i18n="faq.tab_shipping">Shipping & Delivery</button>
           <button class="faq-tab" data-tab="quality" data-i18n="faq.tab_quality">Quality & Certification</button>
         </div>
-        <div class="faq-content show" id="products-faq">
-          <!-- FAQ 1: Expanded -->
-          <div class="faq-item expanded">
-            <div class="faq-question">
-              <span data-i18n="faq.q1_1">What are your main products?</span>
-              
-              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 9l-7 7-7-7"/>
-              </svg>
-            </div>
-            <div class="faq-answer show" data-i18n="faq.a1_1">
-              We specialize in Self Adhesive Vinyl, PVC Flex Banner, Cutting Plotter Film, Acrylic Sheet, PVC Foam Board, and Display Equipment. We also offer custom specifications according to your requirements.
-            </div>
-          </div>
-          <!-- FAQ 2: Collapsed -->
-          <div class="faq-item">
-            <div class="faq-question">
-              <span data-i18n="faq.q1_2">Do you offer custom sizes and specifications?</span>
-              
-              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 9l-7 7-7-7"/>
-              </svg>
-            </div>
-            <div class="faq-answer" data-i18n="faq.a1_2">
-              Yes, we offer custom sizes, thickness, and specifications. Please provide your detailed requirements, and our team will provide a solution tailored to your needs.
-            </div>
-          </div>
-          <!-- FAQ 3: Collapsed -->
-          <div class="faq-item">
-            <div class="faq-question">
-              <span data-i18n="faq.q1_3">What is your minimum order quantity (MOQ)?</span>
-              
-              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 9l-7 7-7-7"/>
-              </svg>
-            </div>
-            <div class="faq-answer" data-i18n="faq.a1_3">
-              Our MOQ varies by product type. Generally, it's 100 pieces for standard products. For custom orders, please contact us directly for specific requirements.
-            </div>
-          </div>
-        </div>
-        <div class="faq-content" id="ordering-faq">
-          <!-- FAQ 1: Collapsed -->
-          <div class="faq-item">
-            <div class="faq-question">
-              <span data-i18n="faq.q2_1">What payment methods do you accept?</span>
-              
-              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 9l-7 7-7-7"/>
-              </svg>
-            </div>
-            <div class="faq-answer" data-i18n="faq.a2_1">
-              We accept T/T (Wire Transfer), PayPal, and Western Union. For new customers, we may require a 30% deposit with the balance paid before shipment.
-            </div>
-          </div>
-          <!-- FAQ 2: Collapsed -->
-          <div class="faq-item">
-            <div class="faq-question">
-              <span data-i18n="faq.q2_2">How long does it take to process my order?</span>
-              
-              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 9l-7 7-7-7"/>
-              </svg>
-            </div>
-            <div class="faq-answer" data-i18n="faq.a2_2">
-              Production time varies by product. Standard products ship within 3-7 days. Custom orders may take 10-15 days. We'll provide an estimated delivery date upon order confirmation.
-            </div>
-          </div>
-          <!-- FAQ 3: Collapsed -->
-          <div class="faq-item">
-            <div class="faq-question">
-              <span data-i18n="faq.q2_3">Can I request samples before placing a bulk order?</span>
-              
-              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 9l-7 7-7-7"/>
-              </svg>
-            </div>
-            <div class="faq-answer" data-i18n="faq.a2_3">
-              Yes, we offer free samples for standard products. Customers only need to cover the shipping cost. For custom samples, please contact us for pricing.
-            </div>
-          </div>
-        </div>
-        <div class="faq-content" id="shipping-faq">
-          <!-- FAQ 1: Collapsed -->
-          <div class="faq-item">
-            <div class="faq-question">
-              <span data-i18n="faq.q3_1">Do you ship internationally?</span>
-              
-              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 9l-7 7-7-7"/>
-              </svg>
-            </div>
-            <div class="faq-answer" data-i18n="faq.a3_1">
-              Yes, we ship to over 50 countries worldwide. We work with major shipping carriers like DHL, FedEx, UPS, and sea freight for larger orders.
-            </div>
-          </div>
-          <!-- FAQ 2: Collapsed -->
-          <div class="faq-item">
-            <div class="faq-question">
-              <span data-i18n="faq.q3_2">What are the shipping costs?</span>
-              
-              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 9l-7 7-7-7"/>
-              </svg>
-            </div>
-            <div class="faq-answer" data-i18n="faq.a3_2">
-              Shipping costs depend on destination, weight, and shipping method. We provide competitive rates and will quote you the exact shipping cost when you place your order.
-            </div>
-          </div>
-          <!-- FAQ 3: Collapsed -->
-          <div class="faq-item">
-            <div class="faq-question">
-              <span data-i18n="faq.q3_3">How long does delivery take?</span>
-              
-              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 9l-7 7-7-7"/>
-              </svg>
-            </div>
-            <div class="faq-answer" data-i18n="faq.a3_3">
-              Express shipping (DHL/FedEx/UPS) takes 5-7 business days. Sea freight takes 25-35 days depending on the destination country and port.
-            </div>
-          </div>
-        </div>
-        <div class="faq-content" id="quality-faq">
-          <!-- FAQ 1: Collapsed -->
-          <div class="faq-item">
-            <div class="faq-question">
-              <span data-i18n="faq.q4_1">Are your products certified?</span>
-              
-              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 9l-7 7-7-7"/>
-              </svg>
-            </div>
-            <div class="faq-answer" data-i18n="faq.a4_1">
-              Yes, we are ISO 9001:2015 certified. Our products meet international quality standards and are exported to Europe, Americas, Southeast Asia, and Middle East markets.
-            </div>
-          </div>
-          <!-- FAQ 2: Collapsed -->
-          <div class="faq-item">
-            <div class="faq-question">
-              <span data-i18n="faq.q4_2">Do you offer quality guarantees?</span>
-              
-              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 9l-7 7-7-7"/>
-              </svg>
-            </div>
-            <div class="faq-answer" data-i18n="faq.a4_2">
-              Absolutely! We offer a 100% quality guarantee. If you receive defective products, we will replace them free of charge or provide a full refund.
-            </div>
-          </div>
-          <!-- FAQ 3: Collapsed -->
-          <div class="faq-item">
-            <div class="faq-question">
-              <span data-i18n="faq.q4_3">Can you provide test reports or samples?</span>
-              
-              <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 9l-7 7-7-7"/>
-              </svg>
-            </div>
-            <div class="faq-answer" data-i18n="faq.a4_3">
-              Yes, we can provide test reports, certificates, and samples upon request. Our quality control team conducts thorough inspections before shipment.
-            </div>
-          </div>
+        <div id="faq-content-container">
+          <div class="faq-content show" id="products-faq"></div>
+          <div class="faq-content" id="ordering-faq"></div>
+          <div class="faq-content" id="shipping-faq"></div>
+          <div class="faq-content" id="quality-faq"></div>
         </div>
       </div>
     </div>
@@ -936,6 +737,19 @@ initSEO({ pageTitle: 'About Us' });
     setText('abt-vision', vision);
     setText('abt-values', values);
 
+    // 页面标题区域（从 about.json 或 i18n）
+    if (d.page_title) {
+      var pageTitle = pickSync(d, 'page_title', lang) || await pickField(d, 'page_title', lang);
+      if (pageTitle) setText('abt-page-title', pageTitle);
+    }
+    if (d.page_subtitle) {
+      var pageSubtitle = pickSync(d, 'page_subtitle', lang) || await pickField(d, 'page_subtitle', lang);
+      if (pageSubtitle) setText('abt-page-subtitle', pageSubtitle);
+    }
+
+    // 其他 section 标签和标题默认使用 i18n，无需从 about.json 获取
+    // （因为 about.json 中没有 companyProfile, ourPurpose 等标签字段）
+
     // Company at a Glance
     setText('abt-founded', d.founded);
     var loc = await pickField(d, 'location', lang);
@@ -957,20 +771,28 @@ initSEO({ pageTitle: 'About Us' });
     if (d.timeline_image) setImg('abt-timeline-img', d.timeline_image);
 
     // 产能区块6张卡片（异步）
-    if (Array.isArray(d.capacity_cards)) {
-      await Promise.all(d.capacity_cards.map(async function(card, i) {
-        card._idx = i; card._type = 'cap'; // 给 pickField 的缓存 key 用
+    // 从 capacity_cards_zh, capacity_cards_vi, capacity_cards_tl 获取翻译
+    var capacityCardsKey = lang === 'en' ? 'capacity_cards' : ('capacity_cards_' + lang);
+    var capacityCards = d[capacityCardsKey] || d.capacity_cards;
+    if (!Array.isArray(capacityCards)) {
+      capacityCards = [];
+    }
+    if (Array.isArray(capacityCards)) {
+      capacityCards.forEach(function(card, i) {
         var titleEl = document.getElementById('cap-title-' + i);
         var descEl  = document.getElementById('cap-desc-' + i);
-        if (titleEl) {
-          var t = await pickField(card, 'title', lang);
-          if (t) titleEl.textContent = t;
+        // 从对应语言的数组中提取翻译字段
+        var titleField = lang === 'en' ? 'title' : ('title_' + lang);
+        var descField = lang === 'en' ? 'desc' : ('desc_' + lang);
+        var title = card[titleField] || card.title;
+        var desc = card[descField] || card.desc;
+        if (titleEl && title) {
+          titleEl.textContent = title;
         }
-        if (descEl) {
-          var desc = await pickField(card, 'desc', lang);
-          if (desc) descEl.textContent = desc;
+        if (descEl && desc) {
+          descEl.textContent = desc;
         }
-      }));
+      });
     }
 
     // 工厂图片（4张）
@@ -987,21 +809,30 @@ initSEO({ pageTitle: 'About Us' });
     }
 
     // 发展里程碑（动态渲染，异步）
-    if (Array.isArray(d.milestones) && d.milestones.length) {
+    // 从 milestones_zh, milestones_vi, milestones_tl 获取翻译
+    var milestonesKey = lang === 'en' ? 'milestones' : ('milestones_' + lang);
+    var milestones = d[milestonesKey] || d.milestones;
+    if (typeof milestones === 'string') {
+      try {
+        milestones = JSON.parse(milestones);
+      } catch(e) {
+        milestones = [];
+      }
+    }
+    if (!Array.isArray(milestones) || milestones.length === 0) {
+      milestones = [];
+    }
+    if (Array.isArray(milestones) && milestones.length) {
       var tlEl = document.getElementById('abt-timeline');
       if (tlEl) {
-        var msHtmls = await Promise.all(d.milestones.map(async function(m, idx) {
-          m._idx = idx; m._type = 'ms'; // 给 pickField 的缓存 key 用
-          var year  = await pickField(m, 'year', lang);
-          var title = await pickField(m, 'title', lang);
-          var desc  = await pickField(m, 'desc', lang);
+        var msHtmls = milestones.map(function(m) {
           return '<div class="timeline-item">'
             + '<div class="timeline-dot"></div>'
-            + '<div class="timeline-date">' + (year || m.year || '') + '</div>'
-            + '<h3>' + (title || m.title || '') + '</h3>'
-            + '<p>' + (desc || m.desc || '') + '</p>'
+            + '<div class="timeline-date">' + (m.year || '') + '</div>'
+            + '<h3>' + (m.title || '') + '</h3>'
+            + '<p>' + (m.desc || '') + '</p>'
             + '</div>';
-        }));
+        });
         tlEl.innerHTML = msHtmls.join('');
       }
     }
@@ -1113,6 +944,157 @@ window.addEventListener('DOMContentLoaded', function() {
 if (typeof applyAboutImages === 'function') {
   applyAboutImages();
 }
+
+// ── FAQ 动态加载（来自 /api/faqs）────────────────────────────────
+(function() {
+  var faqCache = null;
+  var currentTab = 'products';
+
+  function getLang() {
+    try { return localStorage.getItem('jinyu_lang') || 'en'; } catch(e) { return 'en'; }
+  }
+
+  function pickFaqField(faq, base, lang) {
+    if (!faq) return '';
+    if (lang === 'zh') return faq[base + '_zh'] || faq[base] || '';
+    if (lang === 'vi') return faq[base + '_vi'] || faq[base + '_zh'] || faq[base] || '';
+    if (lang === 'tl') return faq[base + '_tl'] || faq[base + '_fil'] || faq[base + '_ph'] || faq[base + '_zh'] || faq[base] || '';
+    return faq[base] || '';
+  }
+
+  function createFaqItem(question, answer, isExpanded) {
+    return '<div class="faq-item' + (isExpanded ? ' expanded' : '') + '">'
+      + '<div class="faq-question" onclick="toggleFaqItem(this)">'
+      + '<span>' + (question || '') + '</span>'
+      + '<svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">'
+      + '<path d="M19 9l-7 7-7-7"/>'
+      + '</svg>'
+      + '</div>'
+      + '<div class="faq-answer' + (isExpanded ? ' show' : '') + '">' + (answer || '') + '</div>'
+      + '</div>';
+  }
+
+  function toggleFaqItem(el) {
+    var item = el.closest('.faq-item');
+    if (!item) return;
+    var answer = item.querySelector('.faq-answer');
+    var isExpanded = item.classList.contains('expanded');
+    
+    if (isExpanded) {
+      item.classList.remove('expanded');
+      if (answer) answer.classList.remove('show');
+    } else {
+      item.classList.add('expanded');
+      if (answer) answer.classList.add('show');
+    }
+  }
+  window.toggleFaqItem = toggleFaqItem;
+
+  async function renderFaqs(faqs) {
+    if (!faqs || !Array.isArray(faqs)) return;
+    
+    var lang = getLang();
+    var tabs = ['products', 'ordering', 'shipping', 'quality'];
+    var firstTabWithContent = null;
+    
+    for (var i = 0; i < tabs.length; i++) {
+      var tab = tabs[i];
+      var container = document.getElementById(tab + '-faq');
+      if (!container) continue;
+      
+      var tabFaqs = faqs.filter(function(f) { return f.tab === tab; });
+      
+      if (tabFaqs.length === 0) {
+        container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--gray-400);font-size:14px;">No FAQs in this category</div>';
+        continue;
+      }
+      
+      if (!firstTabWithContent) firstTabWithContent = tab;
+      
+      var html = '';
+      for (var j = 0; j < tabFaqs.length; j++) {
+        var faq = tabFaqs[j];
+        var question = await pickFaqField(faq, 'question', lang);
+        var answer = await pickFaqField(faq, 'answer', lang);
+        html += createFaqItem(question, answer, tab === currentTab && j === 0);
+      }
+      container.innerHTML = html;
+    }
+    
+    if (firstTabWithContent && firstTabWithContent !== currentTab) {
+      var currentContainer = document.getElementById(currentTab + '-faq');
+      if (currentContainer && currentContainer.innerHTML.indexOf('No FAQs') !== -1) {
+        currentTab = firstTabWithContent;
+        var tabs2 = document.querySelectorAll('#faq-tabs-container .faq-tab');
+        tabs2.forEach(function(t) {
+          t.classList.toggle('active', t.getAttribute('data-tab') === currentTab);
+        });
+        var contents = document.querySelectorAll('#faq-content-container .faq-content');
+        contents.forEach(function(c) {
+          c.classList.toggle('show', c.id === currentTab + '-faq');
+        });
+        renderFaqs(faqs);
+      }
+    }
+  }
+
+  function initFaqTabs() {
+    var tabsContainer = document.getElementById('faq-tabs-container');
+    if (!tabsContainer) return;
+    
+    var tabs = tabsContainer.querySelectorAll('.faq-tab');
+    var contents = document.querySelectorAll('#faq-content-container .faq-content');
+    
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var tabName = this.getAttribute('data-tab');
+        
+        tabs.forEach(function(t) { t.classList.remove('active'); });
+        this.classList.add('active');
+        
+        contents.forEach(function(content) {
+          content.classList.toggle('show', content.id === tabName + '-faq');
+        });
+        
+        currentTab = tabName;
+      });
+    });
+  }
+
+  async function loadFaqs() {
+    try {
+      var res = await fetch('/api/faqs');
+      var json = await res.json();
+      if (json.success && json.data) {
+        faqCache = json.data;
+        await renderFaqs(faqCache);
+        initFaqTabs();
+      }
+    } catch(e) {
+      console.warn('FAQ load failed:', e);
+    }
+  }
+
+  loadFaqs();
+
+  document.addEventListener('langChange', function() {
+    if (faqCache) {
+      renderFaqs(faqCache);
+    } else {
+      loadFaqs();
+    }
+  });
+
+  if (window.i18n) {
+    var origChange = window.i18n.changeLanguage.bind(window.i18n);
+    window.i18n.changeLanguage = async function(lang) {
+      await origChange(lang);
+      if (faqCache) {
+        await renderFaqs(faqCache);
+      }
+    };
+  }
+})();
 </script>
 
 </body>

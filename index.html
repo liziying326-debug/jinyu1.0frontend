@@ -445,28 +445,17 @@
       </div>
       <div class="footer-col">
         <h4 data-i18n="footer.productsTitle">Products</h4>
-        <a href="/products#self-adhesive-vinyl" data-i18n="footer.prod.sav">Self Adhesive Vinyl</a>
-        <a href="/products#flex-banner" data-i18n="footer.prod.flexBanner">PVC Flex Banner</a>
-        <a href="/products#one-way-vision" data-i18n="footer.prod.oneWay">One Way Vision</a>
-        <a href="/products#cutting-vinyl" data-i18n="footer.prod.cutting">Cutting Vinyl</a>
-        <a href="/products#pvc-foam-board" data-i18n="footer.prod.pvcFoam">PVC Foam Board</a>
-        <a href="/products#acrylic-sheet" data-i18n="footer.prod.acrylic">Acrylic Sheet</a>
-        <a href="/products#aluminum-composite-panel" data-i18n="footer.prod.acp">Aluminum Composite Panel</a>
-        <a href="/products#reflective-sheet" data-i18n="footer.prod.reflective">Reflective Sheet</a>
+        <div id="footerProductsList"></div>
+        <a href="/products" style="color:rgba(255,255,255,0.6);font-size:13px;margin-top:8px;display:inline-block;"></a>
       </div>
-      <div class="footer-col">
-        <h4 data-i18n="footer.applicationsTitle">Applications</h4>
-        <a href="/applications#sign-board" data-i18n="footer.app.signBoard">Sign Board</a>
-        <a href="/applications#light-box" data-i18n="footer.app.lightBox">Light Box</a>
-        <a href="/applications#digital-printing" data-i18n="footer.app.digital">Digital Printing</a>
-        <a href="/applications#outdoor-advertising" data-i18n="footer.app.outdoor">Outdoor Advertising</a>
-        <a href="/applications#exhibition-display" data-i18n="footer.app.exhibition">Exhibition Display</a>
-        <h4 style="margin-top:20px;" data-i18n="footer.companyTitle">Company</h4>
-        <a href="/about#company-profile" data-i18n="footer.company.profile">Company Profile</a>
-        <a href="/about#factory" data-i18n="footer.company.factory">Factory</a>
-        <a href="/case-studies" data-i18n="footer.company.cases">Case Studies</a>
-        <a href="/news" data-i18n="footer.company.news">News</a>
+
+       <div class="footer-col">
+        <h4 data-i18n="footer.companyTitle">Company</h4>
+        <a href="/about#company-profile" data-i18n="nav.about_sub.companyProfile">Company Profile</a>
+        <a href="/about#factory" data-i18n="nav.about_sub.factory">Factory</a>
+        <a href="/about#production-capacity" data-i18n="nav.about_sub.productionCapacity">Production Capacity</a>
       </div>
+      
       <div class="footer-col">
         <h4 data-i18n="footer.quickContactTitle">Quick Contact</h4>
         <p style="font-size:13px;color:rgba(255,255,255,0.55);margin-bottom:16px;" data-i18n="footer.quickContactDesc">Get pricing and product details within 24 hours.</p>
@@ -1047,6 +1036,47 @@ document.addEventListener('langChange', (e) => {
       })
       .catch(function(e) { console.error('renderHomeProducts error:', e); });
   }
+})();
+
+// ── Footer 产品列表动态渲染 ───────────────────────────────────────────────────
+(function() {
+  var footerProductsList = document.getElementById('footerProductsList');
+  if (!footerProductsList) return;
+
+  async function getProductNameAsync(p, lang) {
+    if (window.autoTranslate && window.autoTranslate.pickLang) {
+      var name = await window.autoTranslate.pickLang(p, 'name', lang);
+      if (name) return name;
+    }
+    if (lang === 'zh') return p.name_zh || p.name_en || p.name || '';
+    if (lang === 'vi') return p.name_vi || p.name_en || p.name || '';
+    return p.name_en || p.name || '';
+  }
+
+  async function renderFooterProducts() {
+    try {
+      var resp = await fetch('/api/products');
+      if (!resp.ok) return;
+      var json = await resp.json();
+      var products = Array.isArray(json) ? json : (json.success ? json.data : (json.value || []));
+      if (!products || !products.length) return;
+
+      var lang = localStorage.getItem('jinyu_lang') || localStorage.getItem('lang') || 'en';
+      var html = await Promise.all(products.slice(0, 8).map(async function(p) {
+        var name = await getProductNameAsync(p, lang);
+        return '<a href="/products/' + encodeURIComponent(p.id) + '" style="display:block;padding:4px 0;color:rgba(255,255,255,0.6);transition:color 0.2s;">' + name + '</a>';
+      }));
+      footerProductsList.innerHTML = html.join('');
+    } catch(e) {
+      console.error('renderFooterProducts error:', e);
+    }
+  }
+
+  renderFooterProducts();
+
+  document.addEventListener('indexLangChange', function() {
+    renderFooterProducts();
+  });
 })();
 
 // ── Success Modal ──────────────────────────────────────────────────────────────

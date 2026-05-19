@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>测试社交媒体图标</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .test-container {
+      background: white;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .nav-social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #e5e7eb;
+      color: #4b5563;
+      text-decoration: none;
+      margin: 0 8px;
+      transition: all 0.2s;
+    }
+    .nav-social-icon:hover {
+      background: #E8751A;
+      color: white;
+    }
+    .footer-social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: #374151;
+      color: white;
+      text-decoration: none;
+      margin: 0 8px;
+      transition: all 0.2s;
+    }
+    .footer-social-icon:hover {
+      background: #E8751A;
+    }
+  </style>
+</head>
+<body>
+  <h1>测试社交媒体图标加载</h1>
+  
+  <div class="test-container">
+    <h2>导航栏样式（最多3个图标）</h2>
+    <div id="nav-social-icons"></div>
+  </div>
+
+  <div class="test-container">
+    <h2>Footer样式（品牌色）</h2>
+    <div id="footer-social-icons"></div>
+  </div>
+
+  <div class="test-container">
+    <h2>调试信息</h2>
+    <div id="debug-info"></div>
+  </div>
+
+  <script src="/api.js"></script>
+  <script>
+    const debugEl = document.getElementById('debug-info');
+    
+    function log(msg) {
+      console.log(msg);
+      debugEl.innerHTML += `<p>${msg}</p>`;
+    }
+
+    log('开始加载社交媒体图标...');
+    log('API_BASE: ' + API_BASE);
+    log('loadSocialIcons 类型: ' + typeof loadSocialIcons);
+
+    // 测试1: 导航栏图标
+    if (typeof loadSocialIcons === 'function') {
+      log('✅ loadSocialIcons 函数存在，开始调用...');
+      
+      // 导航栏（最多3个）
+      loadSocialIcons('#nav-social-icons', { 
+        className: 'nav-social-icon',
+        maxCount: 3 
+      });
+      
+      // Footer（品牌色）
+      loadSocialIcons('#footer-social-icons', { 
+        className: 'footer-social-icon',
+        brandColor: true 
+      });
+      
+      log('✅ loadSocialIcons 调用完成');
+    } else {
+      log('❌ loadSocialIcons 函数不存在！');
+    }
+
+    // 直接测试API
+    fetch(API_BASE + '/api/social-links')
+      .then(r => r.json())
+      .then(data => {
+        log('✅ API返回数据: ' + JSON.stringify(data).substring(0, 200) + '...');
+        log('数据条数: ' + data.length);
+      })
+      .catch(err => {
+        log('❌ API调用失败: ' + err.message);
+      });
+  </script>
+</body>
+</html>

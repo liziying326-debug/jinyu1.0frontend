@@ -461,23 +461,29 @@ function injectMetaIntoHtml(s, meta) {
   const d = escAttr(meta.description);
   const i = escAttr(meta.image);
   const u = escAttr(meta.url);
+  // title：始终直接替换
   s = s.replace(/<title>[^<]*<\/title>/, '<title>' + t + '</title>');
-  s = s.replace(/<meta property="og:title" content="[^"]*"/, '<meta property="og:title" content="' + t + '"');
-  s = s.replace(/<meta name="twitter:title" content="[^"]*"/, '<meta name="twitter:title" content="' + t + '"');
-  s = s.replace(/<meta property="og:description" content="[^"]*"/, '<meta property="og:description" content="' + d + '"');
-  s = s.replace(/<meta name="twitter:description" content="[^"]*"/, '<meta name="twitter:description" content="' + d + '"');
-  s = s.replace(/<meta property="og:image" content="[^"]*"/, '<meta property="og:image" content="' + i + '"');
-  s = s.replace(/<meta name="twitter:image" content="[^"]*"/, '<meta name="twitter:image" content="' + i + '"');
-  if (!/rel="canonical"/.test(s)) {
-    s = s.replace(/(<meta property="og:site_name"[^>]*>)/, '$1\n  <link rel="canonical" href="' + u + '" />');
-  }
-  if (!/property="og:url"/.test(s)) {
-    s = s.replace(/(<meta property="og:site_name"[^>]*>)/, '$1\n  <meta property="og:url" content="' + u + '" />');
-  }
-  if (!/<meta name="description"/.test(s)) {
-    s = s.replace(/(<meta property="og:site_name"[^>]*>)/, '$1\n  <meta name="description" content="' + d + '" />');
-  }
+  // 其余标签：有则更新，无则插入到 </title> 之后
+  // 兼容详情页模板（product-detail.html / case-detail.html）缺少 og:site_name 等锚点的情况
+  s = setOrInsertMeta(s, /<meta property="og:title"[^>]*>/, '<meta property="og:title" content="' + t + '" />');
+  s = setOrInsertMeta(s, /<meta name="twitter:title"[^>]*>/, '<meta name="twitter:title" content="' + t + '" />');
+  s = setOrInsertMeta(s, /<meta property="og:description"[^>]*>/, '<meta property="og:description" content="' + d + '" />');
+  s = setOrInsertMeta(s, /<meta name="twitter:description"[^>]*>/, '<meta name="twitter:description" content="' + d + '" />');
+  s = setOrInsertMeta(s, /<meta property="og:image"[^>]*>/, '<meta property="og:image" content="' + i + '" />');
+  s = setOrInsertMeta(s, /<meta name="twitter:image"[^>]*>/, '<meta name="twitter:image" content="' + i + '" />');
+  s = setOrInsertMeta(s, /<link rel="canonical"[^>]*>/, '<link rel="canonical" href="' + u + '" />');
+  s = setOrInsertMeta(s, /<meta property="og:url"[^>]*>/, '<meta property="og:url" content="' + u + '" />');
+  // description：始终确保存在（修复产品/案例详情页缺失 meta description）
+  s = setOrInsertMeta(s, /<meta name="description"[^>]*>/, '<meta name="description" content="' + d + '" />');
   return s;
+}
+
+// 有则替换、无则插入到 </title> 之后
+function setOrInsertMeta(s, re, replacement) {
+  if (re.test(s)) {
+    return s.replace(re, replacement);
+  }
+  return s.replace(/(<\/title>)/, '$1\n  ' + replacement);
 }
 
 function serveDetailWithMeta(req, res, opts) {

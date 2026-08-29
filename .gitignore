@@ -9,3 +9,9 @@ node_modules
 .env.*
 !.env.example
 translations.json
+about.html
+applications.html
+case-studies.html
+contact.html
+news.html
+products.html

@@ -218,6 +218,12 @@ async function loadNavProductDropdown() {
 
 // 提交联系表单
 async function submitContact(formData) {
+  // Honeypot 防刷：页面隐藏字段（.hp-trap）机器人会填，人类看不到不会填；
+  // 后端收到非空的 hp 字段即判定为垃圾提交并丢弃。
+  try {
+    var _hpEl = document.querySelector('.hp-trap');
+    formData.hp = _hpEl && _hpEl.value ? String(_hpEl.value).trim() : '';
+  } catch (e) { formData.hp = ''; }
   try {
     const response = await fetch(`${API_BASE}/api/contact`, {
       method: 'POST',

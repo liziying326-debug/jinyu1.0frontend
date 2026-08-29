@@ -16,19 +16,54 @@ function escapeHtml(text) {
 async function loadFaqs() {
   if (faqCache.length) {
     await renderFaqs(faqCache);
+    injectFaqJsonLd(faqCache);
     return;
   }
-  
+
   try {
     const res = await fetch('/api/faqs');
     const json = await res.json();
     if (json.success && Array.isArray(json.data)) {
       faqCache = json.data;
       await renderFaqs(faqCache);
+      injectFaqJsonLd(faqCache);
     }
   } catch(e) {
     console.error('[FAQ] Load failed:', e);
   }
+}
+
+// 注入 FAQPage JSON-LD 到 <head>（SEO 富媒体：搜索结果可展开问答）
+function injectFaqJsonLd(faqs) {
+  if (!faqs || !faqs.length) return;
+  // 重复注入时移除旧的（语言切换 / loadFaqs 重入）
+  const existing = document.querySelector('script[data-faq-jsonld="1"]');
+  if (existing) existing.remove();
+
+  const lang = (window.i18n && window.i18n.currentLang) || 'en';
+  const mainEntity = [];
+  for (let i = 0; i < faqs.length; i++) {
+    const f = faqs[i];
+    const name = f['question_' + lang] || f.question || '';
+    const text = f['answer_' + lang] || f.answer || '';
+    if (!name || !text) continue; // 跳过空问答
+    mainEntity.push({
+      '@type': 'Question',
+      name: name,
+      acceptedAnswer: { '@type': 'Answer', text: text }
+    });
+  }
+  if (!mainEntity.length) return;
+
+  const script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.setAttribute('data-faq-jsonld', '1');
+  script.textContent = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: mainEntity
+  });
+  document.head.appendChild(script);
 }
 
 async function renderFaqs(faqs) {

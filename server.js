@@ -424,6 +424,36 @@ function truncateMeta(str, n) {
   return (cut > 0 ? str.slice(0, cut) : str.slice(0, n)) + '…';
 }
 
+// 产品 URL slug：英文名 → URL safe（与前端 makeProductSlug 保持一致）
+function makeProductSlug(p) {
+  const name = (p && (p.name_en || p.name)) || '';
+  return name.toLowerCase().replace(/[^a-z0-9一-龥]+/g, '-').replace(/^-+|-+$/g, '') || String((p && p.id) || '');
+}
+
+// 产品页 JSON-LD（Product schema，拿富媒体搜索结果）
+function buildProductJsonLd(p) {
+  const name = p.name_en || p.name || 'Product';
+  const desc = truncateMeta(p.description_en || p.description || '');
+  const imgs = (p.images && p.images.length) ? p.images : (p.main_image ? [p.main_image] : (p.img ? [p.img] : []));
+  const raw = imgs[0] || '';
+  const img = raw && /^https?:\/\//.test(raw) ? raw : (raw ? SITE_BASE + raw : SITE_BASE + '/images/factory-hero.jpg');
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: name,
+    image: [img],
+    description: desc,
+    brand: { '@type': 'Brand', name: 'Jin Yu Advertising Materials' },
+    sku: String(p.id),
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      url: SITE_BASE + '/products/' + encodeURIComponent(makeProductSlug(p))
+    }
+  };
+}
+
 function buildProductMeta(p) {
   const name = p.name_en || p.name || 'Product';
   const desc = truncateMeta(p.description_en || p.description || '');
@@ -436,7 +466,7 @@ function buildProductMeta(p) {
     title: name + ' | Jin Yu Advertising Materials',
     description: desc,
     image: img,
-    url: SITE_BASE + '/products/' + encodeURIComponent(p.id),
+    url: SITE_BASE + '/products/' + encodeURIComponent(makeProductSlug(p)),
   };
 }
 
@@ -486,12 +516,18 @@ function setOrInsertMeta(s, re, replacement) {
   return s.replace(/(<\/title>)/, '$1\n  ' + replacement);
 }
 
+// 产品页 JSON-LD 注入到 </head> 之前
+function injectProductJsonLd(html, p) {
+  const ld = '<script type="application/ld+json">' + JSON.stringify(buildProductJsonLd(p)) + '</' + 'script>';
+  return html.replace('</head>', ld + '</head>');
+}
+
 function serveDetailWithMeta(req, res, opts) {
   const { pathname, filePath, contentType, slug } = opts;
   const isCase = pathname === '/case-detail.html';
   const apiPath = isCase ? '/api/case-studies' : '/api/products';
   const urlStr = `http://${ADMIN_HOST}:${ADMIN_PORT}${apiPath}`;
-  const finish = (meta, { notFound = false } = {}) => {
+  const finish = (meta, { notFound = false, item = null } = {}) => {
     fs.readFile(filePath, (err, data) => {
       if (err) {
         res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
@@ -502,11 +538,14 @@ function serveDetailWithMeta(req, res, opts) {
       if (meta) {
         html = injectMetaIntoHtml(html, meta);
       }
+      if (item && !notFound && !isCase) {
+        html = injectProductJsonLd(html, item);
+      }
       if (notFound) {
         // 软 404：错误 slug 返回 404 + noindex，避免死链被搜索引擎收录
         html = html.replace('</head>', '<meta name="robots" content="noindex,follow"></head>');
       }
-      res.writeHead(notFound ? 404 : 200, { 'Content-Type': contentType, 'Cache-Control': 'no-store, no-cache, must-revalidate', 'Pragma': 'no-cache', 'Expires': '0' });
+      res.writeHead(notFound ? 404 : 200, { 'Content-Type': contentType, 'Cache-Control': 'public, max-age=300, must-revalidate' });
       res.end(Buffer.from(html, 'utf8'));
     });
   };
@@ -517,19 +556,31 @@ function serveDetailWithMeta(req, res, opts) {
     apiRes.on('end', () => {
       let meta = null;
       let itemFound = false;
+      let item = null;
       try {
         const json = JSON.parse(body);
         const arr = Array.isArray(json) ? json : (json.data || json.value || []);
-        const item = isCase
+        item = isCase
           ? arr.find((c) => String(c.slug) === String(slug) || String(c.id) === String(slug))
-          : arr.find((p) => String(p.id) === String(slug));
-        if (item) { meta = isCase ? buildCaseMeta(item) : buildProductMeta(item); itemFound = true; }
+          : arr.find((p) => makeProductSlug(p) === String(slug) || String(p.id) === String(slug));
+        if (item) {
+          // 旧时间戳 id URL → 301 跳转到语义化 slug（仅产品页、且通过纯数字 id 访问时）
+          if (!isCase && opts.originalPathname && /^\/products\/\d+$/.test(opts.originalPathname)) {
+            const targetSlug = makeProductSlug(item);
+            if (targetSlug && targetSlug !== String(slug)) {
+              res.writeHead(301, { 'Location': SITE_BASE + '/products/' + encodeURIComponent(targetSlug) });
+              return res.end();
+            }
+          }
+          meta = isCase ? buildCaseMeta(item) : buildProductMeta(item);
+          itemFound = true;
+        }
       } catch (e) { /* 解析失败时回退到基线模板 */ }
       if (!itemFound) {
         // slug 存在但后台无此数据 → 软 404（返回 404 + noindex）
         return finish(null, { notFound: true });
       }
-      finish(meta);
+      finish(meta, { item: isCase ? null : item });
     });
   }).on('error', () => {
     finish(null); // 后台不可用时仍回退 200（避免全站变 404）
@@ -1134,7 +1185,7 @@ const server = http.createServer((req, res) => {
       const _params = new URLSearchParams((parsedUrl.search || '').replace(/^\?/, ''));
       _slug = (_params.get('slug') || '').trim();
     }
-    return serveDetailWithMeta(req, res, { pathname, filePath, contentType, slug: _slug });
+    return serveDetailWithMeta(req, res, { pathname, filePath, contentType, slug: _slug, originalPathname });
   }
 
   console.log('[File] 尝试读取文件:', filePath);
@@ -1177,10 +1228,8 @@ const server = http.createServer((req, res) => {
     const headers = { 'Content-Type': contentType };
     // 缓存策略：HTML 始终重新验证以保证内容更新立即可见；其余静态资源短期缓存以兼顾性能
     if (ext === '.html') {
-      // HTML 始终禁止浏览器缓存，确保后台/CMS 编辑后立即可见
-      headers['Cache-Control'] = 'no-store, no-cache, must-revalidate';
-      headers['Pragma'] = 'no-cache';
-      headers['Expires'] = '0';
+      // HTML 允许短时缓存（5 分钟）：兼顾 SEO 爬虫效率，CMS 编辑后最多 5 分钟生效
+      headers['Cache-Control'] = 'public, max-age=300, must-revalidate';
     } else {
       headers['Cache-Control'] = 'public, max-age=300, must-revalidate';
     }
